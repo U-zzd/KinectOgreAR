@@ -1,0 +1,48 @@
+﻿生成启动时间为 2012/12/2 20:28:45。
+     1>项目“F:\My Lab\My Kinect\MyKinectTest\VirtualTS\OpenNI Samples\NiViewer\NiViewer.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Win32Debug\NiViewer.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I"C:\Program Files (x86)\OpenNI\Include" /I. /ZI /nologo /W4 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _MBCS /Gm /EHa /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Win32Debug\\" /Fd"Win32Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt .\Audio.cpp .\Capture.cpp .\Device.cpp .\Draw.cpp .\Keyboard.cpp .\Menu.cpp .\MouseInput.cpp .\NiViewer.cpp .\Statistics.cpp
+         Statistics.cpp
+         NiViewer.cpp
+     1>f:\my lab\my kinect\mykinecttest\virtualts\openni samples\niviewer\glh\glh_extensions.h(189): warning C4996: 'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strdup. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 10.0\vc\include\string.h(238) : 参见“strdup”的声明
+         MouseInput.cpp
+         Menu.cpp
+         Keyboard.cpp
+         Draw.cpp
+         Device.cpp
+         Capture.cpp
+         Audio.cpp
+         正在生成代码...
+       ResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /l"0x0409" /I"C:\Program Files (x86)\OpenNI\Include" /nologo /fo"Win32Debug\OpenNI.res" ..\Res\OpenNI.rc 
+       ManifestResourceCompile:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\rc.exe /nologo /fo"Win32Debug\NiViewer.exe.embed.manifest.res" Win32Debug\NiViewer_manifest.rc 
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"../Bin/Debug\NiViewer.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Program Files (x86)\OpenNI\Lib" /LIBPATH:./Libs openNI.lib glut32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Win32Debug\NiViewer.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"F:\My Lab\My Kinect\MyKinectTest\VirtualTS\OpenNI Samples\Bin\Debug\NiViewer.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"../Bin/Debug\NiViewer.lib" /MACHINE:X86 Win32Debug\OpenNI.res
+         Win32Debug\NiViewer.exe.embed.manifest.res
+         Win32Debug\Audio.obj
+         Win32Debug\Capture.obj
+         Win32Debug\Device.obj
+         Win32Debug\Draw.obj
+         Win32Debug\Keyboard.obj
+         Win32Debug\Menu.obj
+         Win32Debug\MouseInput.obj
+         Win32Debug\NiViewer.obj
+         Win32Debug\Statistics.obj
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Win32Debug\NiViewer.exe.embed.manifest" /manifest Win32Debug\NiViewer.exe.intermediate.manifest
+         所有输出均为最新。
+       LinkEmbedManifest:
+         所有输出均为最新。
+         NiViewer.vcxproj -> F:\My Lab\My Kinect\MyKinectTest\VirtualTS\OpenNI Samples\NiViewer\../Bin/Debug\NiViewer.exe
+       FinalizeBuildStatus:
+         正在删除文件“Win32Debug\NiViewer.unsuccessfulbuild”。
+         正在对“Win32Debug\NiViewer.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“F:\My Lab\My Kinect\MyKinectTest\VirtualTS\OpenNI Samples\NiViewer\NiViewer.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:11.82

@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files\KinectDevice">
+      <UniqueIdentifier>{444d9952-cb8f-475a-b8b7-94af5f46accd}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Chrono.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreAppFrameListener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\OgreAppLogic.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\StatsFrameListener.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\TrackingSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\VideoDeviceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\KinectDevice\KinectDevice.cpp">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\KinectDevice\UserSelector.cpp">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\KinectDevice\UserTracker.cpp">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\KinectDevice\ExitPoseDetector.cpp">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\KinectDevice\TrackingInitializer.cpp">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\KinectDevice\KinectDeviceManager.cpp">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Chrono.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\OgreApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\OgreAppFrameListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\OgreAppLogic.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\StatsFrameListener.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\TrackingSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\VideoDeviceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\KinectDevice\KinectDevice.h">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\KinectDevice\SkeletonPoseDetector.h">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\KinectDevice\UserSelector.h">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\KinectDevice\UserTracker.h">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\KinectDevice\UserSelectionStructures.h">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\SinbadCharacterController.h">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\KinectDevice\ExitPoseDetector.h">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\KinectDevice\TrackingInitializer.h">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\KinectDevice\KinectDeviceManager.h">
+      <Filter>Source Files\KinectDevice</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

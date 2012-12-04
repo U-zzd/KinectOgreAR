@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/43/trunk/Demos/Dependencies/kinect/include
+END
+Kinect-win32.h
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/43/trunk/Demos/Dependencies/kinect/include/Kinect-win32.h
+END
+init.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/43/trunk/Demos/Dependencies/kinect/include/init.h
+END
+Kinect-win32-internal.h
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/!svn/ver/43/trunk/Demos/Dependencies/kinect/include/Kinect-win32-internal.h
+END

@@ -1,0 +1,16 @@
+﻿  Audio.cpp
+  Capture.cpp
+  Device.cpp
+  Draw.cpp
+  Keyboard.cpp
+  Menu.cpp
+  MouseInput.cpp
+  NiViewer.cpp
+  Statistics.cpp
+D:\Projects\SDK\OpenNI\Platform\Win32\Redist\Samples\NiViewer\glh/glh_extensions.h(189): warning C4996: 'strdup': The POSIX name for this item is deprecated. Instead, use the ISO C++ conformant name: _strdup. See online help for details.
+          c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\string.h(238) : see declaration of 'strdup'
+  Generating code
+d:\projects\sdk\openni\platform\win32\redist\samples\niviewer\niviewer.cpp(616): warning C4702: unreachable code
+d:\projects\sdk\openni\platform\win32\redist\samples\niviewer\niviewer.cpp(666): warning C4702: unreachable code
+  Finished generating code
+  NiViewer.vcxproj -> D:\Projects\SDK\OpenNI\Platform\Win32\Redist\Samples\NiViewer\../Bin/Release\NiViewer.exe

@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BCACA889-BDEE-4BAA-BFB1-42A10C792A2C}</ProjectGuid>
+    <RootNamespace>ArToolKitPlusDemo</RootNamespace>
+    <Keyword>ManagedCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>NotSet</CharacterSet>
+    <CLRSupport>false</CLRSupport>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.40219.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</LinkIncremental>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(Configuration)\</IntDir>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" />
+    <CodeAnalysisRuleSet Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRules Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+    <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" />
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OGRE;$(OPEN_NI_INCLUDE);$(SolutionDir)\Dependencies\ARToolKitPlus_2.1.1\include;$(SolutionDir)\Dependencies\ofVideoInput\include;$(XN_NITE_INSTALL_PATH)\Include;../include;C:\Program Files %28x86%29\boost\boost_1_44;F:\My Lab\My Kinect\MyKinectTest\VirtualTS\KinectAR\Dependencies\ARToolKitPlus_2.1.1\include;$(SolutionDir)\KinectAR\ArToolKitPlusDemo\src\KinectDevice;$(ogrebullet)\Collisions\include;$(ogrebullet)\Dynamics\include;$(BULLET_ROOT)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;videoInput.lib;ARToolKitPlusD.lib;XnVNITE_1_5_2.lib;openNI.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\KinectAR\Dependencies\ofVideoInput\lib;$(OGRE_HOME)\lib\$(ConfigurationName);$(OGRE_HOME)\lib\$(ConfigurationName)\opt;C:\Program Files %28x86%29\boost\boost_1_44\lib;$(SolutionDir)\KinectAR\Dependencies\ARToolKitPlus_2.1.1\lib\Win32;$(OPEN_NI_LIB64);$(OPEN_NI_LIB);$(XN_NITE_INSTALL_PATH)\Lib;$(XN_NITE_INSTALL_PATH)\Lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>atlthunk.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AssemblyDebug>true</AssemblyDebug>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <AdditionalIncludeDirectories>$(SolutionDir)\Dependencies\ARToolKitPlus_2.1.1\include;$(SolutionDir)\Dependencies\ofVideoInput\include;../include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>OgreMain.lib;OIS.lib;videoInput.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)\Dependencies\ofVideoInput\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <IgnoreSpecificDefaultLibraries>atlthunk.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <PostBuildEvent>
+      <Command>
+      </Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\Chrono.cpp" />
+    <ClCompile Include="..\src\KinectDevice\ExitPoseDetector.cpp" />
+    <ClCompile Include="..\src\KinectDevice\KinectDevice.cpp" />
+    <ClCompile Include="..\src\KinectDevice\KinectDeviceManager.cpp" />
+    <ClCompile Include="..\src\KinectDevice\TrackingInitializer.cpp" />
+    <ClCompile Include="..\src\KinectDevice\UserSelector.cpp" />
+    <ClCompile Include="..\src\KinectDevice\UserTracker.cpp" />
+    <ClCompile Include="..\src\main.cpp" />
+    <ClCompile Include="..\src\OgreApp.cpp" />
+    <ClCompile Include="..\src\OgreAppFrameListener.cpp" />
+    <ClCompile Include="..\src\OgreAppLogic.cpp" />
+    <ClCompile Include="..\src\StatsFrameListener.cpp" />
+    <ClCompile Include="..\src\TrackingSystem.cpp" />
+    <ClCompile Include="..\src\VideoDeviceManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\include\Chrono.h" />
+    <ClInclude Include="..\include\OgreApp.h" />
+    <ClInclude Include="..\include\OgreAppFrameListener.h" />
+    <ClInclude Include="..\include\OgreAppLogic.h" />
+    <ClInclude Include="..\include\StatsFrameListener.h" />
+    <ClInclude Include="..\include\TrackingSystem.h" />
+    <ClInclude Include="..\include\VideoDeviceManager.h" />
+    <ClInclude Include="..\src\KinectDevice\ExitPoseDetector.h" />
+    <ClInclude Include="..\src\KinectDevice\KinectDevice.h" />
+    <ClInclude Include="..\src\KinectDevice\KinectDeviceManager.h" />
+    <ClInclude Include="..\src\KinectDevice\SkeletonPoseDetector.h" />
+    <ClInclude Include="..\src\KinectDevice\TrackingInitializer.h" />
+    <ClInclude Include="..\src\KinectDevice\UserSelectionStructures.h" />
+    <ClInclude Include="..\src\KinectDevice\UserSelector.h" />
+    <ClInclude Include="..\src\KinectDevice\UserTracker.h" />
+    <ClInclude Include="..\src\SinbadCharacterController.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

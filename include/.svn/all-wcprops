@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/!svn/ver/8/trunk/Demos/ArToolKitPlusDemo/include
+END
+OgreAppLogic.h
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/8/trunk/Demos/ArToolKitPlusDemo/include/OgreAppLogic.h
+END
+OgreApp.h
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/!svn/ver/8/trunk/Demos/ArToolKitPlusDemo/include/OgreApp.h
+END
+OgreAppFrameListener.h
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/8/trunk/Demos/ArToolKitPlusDemo/include/OgreAppFrameListener.h
+END
+StatsFrameListener.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/8/trunk/Demos/ArToolKitPlusDemo/include/StatsFrameListener.h
+END
+VideoDeviceManager.h
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/8/trunk/Demos/ArToolKitPlusDemo/include/VideoDeviceManager.h
+END
+TrackingSystem.h
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/8/trunk/Demos/ArToolKitPlusDemo/include/TrackingSystem.h
+END
+Chrono.h
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/!svn/ver/8/trunk/Demos/ArToolKitPlusDemo/include/Chrono.h
+END
