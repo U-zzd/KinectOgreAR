@@ -227,6 +227,85 @@ void OgreAppLogic::createWebcamPlane(int width, int height, Ogre::Real _distance
 	node->setOrientation(mCamera->getOrientation());
 }
 
+void OgreAppLogic::createKinectOverlay(const std::string& colorTextureName, const std::string& depthTextureName, const std::string& coloredDepthTextureName)
+{
+	//Create Color Overlay
+	{
+		//Create Overlay
+		Ogre::OverlayManager& overlayManager = Ogre::OverlayManager::getSingleton();
+		Ogre::Overlay* overlay = overlayManager.create("KinectColorOverlay");
+
+		//Create Material
+		const std::string materialName = "KinectColorMaterial";
+		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+		material->getTechnique(0)->getPass(0)->setLightingEnabled(false);
+		material->getTechnique(0)->getPass(0)->setDepthWriteEnabled(false);
+		material->getTechnique(0)->getPass(0)->createTextureUnitState(colorTextureName);
+
+		//Create Panel
+		Ogre::PanelOverlayElement* panel = static_cast<Ogre::PanelOverlayElement*>(overlayManager.createOverlayElement("Panel", "KinectColorPanel"));
+		panel->setMetricsMode(Ogre::GMM_PIXELS);
+		panel->setMaterialName(materialName);
+		panel->setDimensions((float)Ogre::Kinect::colorWidth, (float)Ogre::Kinect::colorHeight);
+		panel->setPosition(640.0f, 0.0f);
+		overlay->add2D(panel);		
+		overlay->setZOrder(300);
+		overlay->show(); 
+	}
+
+	//Create Depth Overlay
+	{
+		//Create Overlay
+		Ogre::OverlayManager& overlayManager = Ogre::OverlayManager::getSingleton();
+		Ogre::Overlay* overlay = overlayManager.create("KinectDepthOverlay");
+
+		//Create Material
+		const std::string materialName = "KinectDepthMaterial";
+		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+		material->getTechnique(0)->getPass(0)->setLightingEnabled(false);
+		material->getTechnique(0)->getPass(0)->setDepthWriteEnabled(false);
+		material->getTechnique(0)->getPass(0)->setAlphaRejectSettings(CMPF_GREATER, 127);
+
+		material->getTechnique(0)->getPass(0)->createTextureUnitState(depthTextureName);
+		material->getTechnique(0)->getPass(0)->setVertexProgram("Ogre/Compositor/StdQuad_vp");
+		material->getTechnique(0)->getPass(0)->setFragmentProgram("KinectDepth");
+
+		//Create Panel
+		Ogre::PanelOverlayElement* panel = static_cast<Ogre::PanelOverlayElement*>(overlayManager.createOverlayElement("Panel", "KinectDepthPanel"));
+		panel->setMetricsMode(Ogre::GMM_PIXELS);
+		panel->setMaterialName(materialName);
+		panel->setDimensions((float)Ogre::Kinect::depthWidth, (float)Ogre::Kinect::depthHeight);
+		panel->setPosition((float)640.0f, 0.0f);
+		overlay->add2D(panel);		
+		overlay->setZOrder(310);
+		overlay->show();
+	}
+
+	//Create Colored Depth Overlay
+	{
+		//Create Overlay
+		Ogre::OverlayManager& overlayManager = Ogre::OverlayManager::getSingleton();
+		Ogre::Overlay* overlay = overlayManager.create("KinectColoredDepthOverlay");
+
+		//Create Material
+		const std::string materialName = "KinectColoredDepthMaterial";
+		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+		material->getTechnique(0)->getPass(0)->setLightingEnabled(false);
+		material->getTechnique(0)->getPass(0)->setDepthWriteEnabled(false);
+		material->getTechnique(0)->getPass(0)->createTextureUnitState(coloredDepthTextureName);
+
+		//Create Panel
+		Ogre::PanelOverlayElement* panel = static_cast<Ogre::PanelOverlayElement*>(overlayManager.createOverlayElement("Panel", "KinectColoredDepthPanel"));
+		panel->setMetricsMode(Ogre::GMM_PIXELS);
+		panel->setMaterialName(materialName);
+		panel->setDimensions((float)Ogre::Kinect::depthWidth, (float)Ogre::Kinect::depthHeight);
+		panel->setPosition((float)0.0f, 0.0f);
+		overlay->add2D(panel);		
+		overlay->setZOrder(320);
+		overlay->show();
+	}
+}
+
 //--------------------------------- update --------------------------------
 
 bool OgreAppLogic::processInputs(Ogre::Real deltaTime)
