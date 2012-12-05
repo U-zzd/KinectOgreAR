@@ -9,7 +9,8 @@
 #include "SkeletonPoseDetector.h"
 #include "Ogre.h"
 
-
+namespace Kinect
+{
 #define SHOW_DEPTH 1
 #define SHOW_BAR 0
 
@@ -60,6 +61,14 @@ static XnFloat oniColors[][3] =
 	{0,0,0}
 };
 static XnUInt32 nColors = 10;
+
+static const unsigned int colorWidth        = KINECT_COLOR_WIDTH;
+static const unsigned int colorHeight       = KINECT_COLOR_HEIGHT;
+static const unsigned int depthWidth        = KINECT_DEPTH_WIDTH;
+static const unsigned int depthHeight       = KINECT_DEPTH_HEIGHT;
+static const unsigned int nbMicrophone      = KINECT_MICROPHONE_COUNT;
+static const unsigned int audioBufferlength = KINECT_AUDIO_BUFFER_LENGTH;
+
 
 class KinectDevice{
 public:
@@ -286,4 +295,5 @@ private:
 
 };
 
+}
 #endif

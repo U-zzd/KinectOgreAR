@@ -2,6 +2,7 @@
 #include "KinectDevice.h"
 
 using namespace Ogre;
+using namespace Kinect;
 
 KinectDevice::KinectDevice()
 {

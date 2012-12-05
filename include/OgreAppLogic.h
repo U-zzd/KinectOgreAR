@@ -49,7 +49,7 @@ protected:
 
 	void initTracking(int width, int height);
 	void createWebcamPlane(int width, int height, Ogre::Real _distanceFromCamera);
-
+	void createKinectOverlay(const std::string& colorTextureName, const std::string& depthTextureName, const std::string& coloredDepthTextureName);
 	// OGRE
 	OgreApp *mApplication;
 	Ogre::SceneManager *mSceneMgr;

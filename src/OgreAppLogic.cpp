@@ -3,6 +3,7 @@
 #include <Ogre.h>
 #include "Chrono.h"
 #include "StatsFrameListener.h"
+#include <OgrePanelOverlayElement.h>
 
 using namespace Ogre;
 
@@ -44,10 +45,20 @@ bool OgreAppLogic::init(void)
 	int width  = 320;
 	int height = 240;
 
+	const std::string colorTextureName        = "KinectColorTexture";
+	const std::string depthTextureName        = "KinectDepthTexture";
+	const std::string coloredDepthTextureName = "KinectColoredDepthTexture";
+
+	mKinectDevice->createOgreDepthTexture(depthTextureName,"");
+	mKinectDevice->createOgreColoredDepthTexture(coloredDepthTextureName,"");
+	//mKinectDevice->setMotorPosition(mKinectMotorPosition);
+	createKinectOverlay(colorTextureName, depthTextureName, coloredDepthTextureName);
+
 	mTrackingSystem = new TrackingSystem;
 
 	initTracking(width, height);
 	createWebcamPlane(width, height, 45000.0f);	
+
 
 	mStatsFrameListener = new StatsFrameListener(mApplication->getRenderWindow());
 	mApplication->getOgreRoot()->addFrameListener(mStatsFrameListener);
@@ -230,6 +241,7 @@ void OgreAppLogic::createWebcamPlane(int width, int height, Ogre::Real _distance
 void OgreAppLogic::createKinectOverlay(const std::string& colorTextureName, const std::string& depthTextureName, const std::string& coloredDepthTextureName)
 {
 	//Create Color Overlay
+	/*
 	{
 		//Create Overlay
 		Ogre::OverlayManager& overlayManager = Ogre::OverlayManager::getSingleton();
@@ -252,7 +264,7 @@ void OgreAppLogic::createKinectOverlay(const std::string& colorTextureName, cons
 		overlay->setZOrder(300);
 		overlay->show(); 
 	}
-
+	*/
 	//Create Depth Overlay
 	{
 		//Create Overlay
@@ -274,7 +286,7 @@ void OgreAppLogic::createKinectOverlay(const std::string& colorTextureName, cons
 		Ogre::PanelOverlayElement* panel = static_cast<Ogre::PanelOverlayElement*>(overlayManager.createOverlayElement("Panel", "KinectDepthPanel"));
 		panel->setMetricsMode(Ogre::GMM_PIXELS);
 		panel->setMaterialName(materialName);
-		panel->setDimensions((float)Ogre::Kinect::depthWidth, (float)Ogre::Kinect::depthHeight);
+		panel->setDimensions((float)Kinect::depthWidth, (float)Kinect::depthHeight);
 		panel->setPosition((float)640.0f, 0.0f);
 		overlay->add2D(panel);		
 		overlay->setZOrder(310);
@@ -298,7 +310,7 @@ void OgreAppLogic::createKinectOverlay(const std::string& colorTextureName, cons
 		Ogre::PanelOverlayElement* panel = static_cast<Ogre::PanelOverlayElement*>(overlayManager.createOverlayElement("Panel", "KinectColoredDepthPanel"));
 		panel->setMetricsMode(Ogre::GMM_PIXELS);
 		panel->setMaterialName(materialName);
-		panel->setDimensions((float)Ogre::Kinect::depthWidth, (float)Ogre::Kinect::depthHeight);
+		panel->setDimensions((float)Kinect::depthWidth, (float)Kinect::depthHeight);
 		panel->setPosition((float)0.0f, 0.0f);
 		overlay->add2D(panel);		
 		overlay->setZOrder(320);
