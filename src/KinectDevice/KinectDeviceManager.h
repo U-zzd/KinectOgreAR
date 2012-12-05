@@ -2,6 +2,7 @@
 #include <vector>
 #include <Ogre.h>
 #include "KinectDevice.h"
+using namespace Kinect;
 
 class KinectDeviceManager
 {
