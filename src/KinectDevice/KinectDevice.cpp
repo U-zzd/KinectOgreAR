@@ -374,7 +374,7 @@ void KinectDevice::createOgreUserTexture(const std::string UserTextureName, cons
 	if(!UserTextureName.empty())
 	{		
 		mUserTexture  = TextureManager::getSingleton().createManual(
-			UserTextureName, // name
+			&UserTextureName, // name
 			ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 			TEX_TYPE_2D,      // type
 			KINECT_DEPTH_WIDTH, KINECT_DEPTH_HEIGHT,// width & height
@@ -386,9 +386,9 @@ void KinectDevice::createOgreUserTexture(const std::string UserTextureName, cons
 	{
 		// Create a material using the texture
 		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(
-				materialName, // name
+				&materialName, // name
 				ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
-		material->getTechnique(0)->getPass(0)->createTextureUnitState(UserTextureName);
+		material->getTechnique(0)->getPass(0)->createTextureUnitState(&UserTextureName);
 		material->getTechnique(0)->getPass(0)->getTextureUnitState(0)->setTextureRotate(Ogre::Degree(180)); 
 		//material->getTechnique(0)->getPass(0)->setSceneBlending(SBT_TRANSPARENT_ALPHA);
 	}
@@ -399,7 +399,7 @@ void KinectDevice::createOgreDepthTexture(const std::string depthTextureName,con
 	if(!depthTextureName.empty())
 	{
 		mDepthTexture = TextureManager::getSingleton().createManual(
-			depthTextureName, 
+			&depthTextureName, 
 			ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, 
 			TEX_TYPE_2D, 
 			KINECT_DEPTH_WIDTH, 
@@ -411,11 +411,11 @@ void KinectDevice::createOgreDepthTexture(const std::string depthTextureName,con
 	if(!materialName.empty())
 	{
 		//Create Material
-		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(&materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 		material->getTechnique(0)->getPass(0)->setLightingEnabled(false);
 		material->getTechnique(0)->getPass(0)->setDepthWriteEnabled(false);
 		material->getTechnique(0)->getPass(0)->setAlphaRejectSettings(CMPF_GREATER, 127);
-		material->getTechnique(0)->getPass(0)->createTextureUnitState(depthTextureName);
+		material->getTechnique(0)->getPass(0)->createTextureUnitState(&depthTextureName);
 		//material->getTechnique(0)->getPass(0)->getTextureUnitState(0)->setTextureRotate(Ogre::Degree(180)); 
 		//material->getTechnique(0)->getPass(0)->setVertexProgram("Ogre/Compositor/StdQuad_vp");
 		//material->getTechnique(0)->getPass(0)->setFragmentProgram("KinectDepth");
@@ -427,7 +427,7 @@ void KinectDevice::createOgreColorTexture(const std::string colorTextureName, co
 	if(!colorTextureName.empty())
 	{
 		mColorTexture = TextureManager::getSingleton().createManual(
-			colorTextureName, 
+			&colorTextureName, 
 			ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, 
 			TEX_TYPE_2D, 
 			KINECT_DEPTH_WIDTH, 
@@ -439,10 +439,10 @@ void KinectDevice::createOgreColorTexture(const std::string colorTextureName, co
 	if(!materialName.empty())
 	{
 		//Create Material
-		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(&materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 		material->getTechnique(0)->getPass(0)->setLightingEnabled(false);
 		material->getTechnique(0)->getPass(0)->setDepthWriteEnabled(false);
-		material->getTechnique(0)->getPass(0)->createTextureUnitState(colorTextureName);
+		material->getTechnique(0)->getPass(0)->createTextureUnitState(&colorTextureName);
 		material->getTechnique(0)->getPass(0)->getTextureUnitState(0)->setTextureRotate(Ogre::Degree(180)); 
 	}
 }
@@ -452,7 +452,7 @@ void KinectDevice::createOgreColoredDepthTexture(const std::string coloredDepthT
 	if(!coloredDepthTextureName.empty())
 	{
 		mColoredDepthTexture = TextureManager::getSingleton().createManual(
-		coloredDepthTextureName, 
+		&coloredDepthTextureName, 
 		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, 
 		TEX_TYPE_2D, 
 		KINECT_DEPTH_WIDTH, 
@@ -466,10 +466,10 @@ void KinectDevice::createOgreColoredDepthTexture(const std::string coloredDepthT
 	if(!materialName.empty())
 	{
 		//Create Material
-		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(&materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 		material->getTechnique(0)->getPass(0)->setLightingEnabled(false);
 		material->getTechnique(0)->getPass(0)->setDepthWriteEnabled(false);
-		material->getTechnique(0)->getPass(0)->createTextureUnitState(coloredDepthTextureName);
+		material->getTechnique(0)->getPass(0)->createTextureUnitState(&coloredDepthTextureName);
 		//material->getTechnique(0)->getPass(0)->getTextureUnitState(0)->setTextureRotate(Ogre::Degree(180)); 
 	}
 }
