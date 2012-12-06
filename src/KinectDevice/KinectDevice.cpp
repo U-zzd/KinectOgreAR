@@ -474,12 +474,11 @@ void KinectDevice::createOgreColoredDepthTexture(const std::string coloredDepthT
 	}
 }
 
-/*
 void KinectDevice::DrawGLUTDepthMapTexture()
 {
     XnUInt16 g_nXRes; 
     XnUInt16 g_nYRes; 
-    m_pUserTrackerObj->GetImageRes(g_nXRes,g_nYRes);
+    GetImageRes(g_nXRes,g_nYRes);
 
     if (g_bDrawPixels)
     {
@@ -512,7 +511,7 @@ void KinectDevice::DrawGLUTDepthMapTexture()
 
     glDisable(GL_TEXTURE_2D);
 }
-*/
+
 
 void* KinectDevice::getKinectColorBufferData() const
 {
