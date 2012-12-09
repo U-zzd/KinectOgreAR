@@ -1,0 +1,66 @@
+material madeira/SOLID/VertCol
+{
+	technique
+	{
+		pass
+		{
+			diffuse vertexcolour
+			specular 0.000000 0.000000 0.000000 47.000000
+		}
+	}
+}
+material juntas/SOLID/VertCol
+{
+	technique
+	{
+		pass
+		{
+			diffuse vertexcolour
+			specular 0.000000 0.000000 0.000000 12.500000
+		}
+	}
+}
+material dentroBoca/SOLID/VertCol
+{
+	technique
+	{
+		pass
+		{
+			diffuse vertexcolour
+			specular 0.000000 0.000000 0.000000 12.500000
+		}
+	}
+}
+material sobrancelha/SOLID/VertCol
+{
+	technique
+	{
+		pass
+		{
+			diffuse vertexcolour
+			specular 0.089874 0.089874 0.089874 12.500000
+		}
+	}
+}
+material lingua/SOLID/VertCol
+{
+	technique
+	{
+		pass
+		{
+			diffuse vertexcolour
+			specular 0.299580 0.299580 0.299580 12.500000
+		}
+	}
+}
+material dentes/SOLID/VertCol
+{
+	technique
+	{
+		pass
+		{
+			diffuse vertexcolour
+			specular 0.000000 0.000000 0.000000 12.500000
+		}
+	}
+}

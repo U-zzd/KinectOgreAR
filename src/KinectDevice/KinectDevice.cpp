@@ -12,15 +12,23 @@ KinectDevice::KinectDevice()
 	mColorTexture.setNull();
 	mDepthTexture.setNull();
 	mColoredDepthTexture.setNull();
+	memset(mDepthBuffer,0,KINECT_COLOR_WIDTH * KINECT_COLOR_HEIGHT);
+	memset(mColorBuffer,0,KINECT_COLOR_WIDTH * KINECT_COLOR_HEIGHT * 3);
+	memset(mUserBuffer,0,KINECT_COLOR_WIDTH * KINECT_COLOR_HEIGHT * 3);
+	memset(mColoredDepthBuffer,0,KINECT_COLOR_WIDTH * KINECT_COLOR_HEIGHT * 3);
 	mColorTextureAvailable = false;
 	mDepthTextureAvailable = false;
 	mColoredDepthTextureAvailable = false;
+
+	mColoredDepthPixelBox = Ogre::PixelBox(KINECT_DEPTH_WIDTH, KINECT_DEPTH_HEIGHT, 1, Ogre::PF_R8G8B8, mColoredDepthBuffer);
+	mDepthPixelBox = Ogre::PixelBox(KINECT_DEPTH_WIDTH, KINECT_DEPTH_HEIGHT, 1, Ogre::PF_L8, mDepthBuffer);
+	mColorPixelBox = Ogre::PixelBox(KINECT_COLOR_WIDTH, KINECT_COLOR_HEIGHT, 1, Ogre::PF_B8G8R8, mColorBuffer);
+
 	m_hUserCallbacks = NULL;
 	m_hPoseCallbacks = NULL;
 	m_hCalibrationCallbacks = NULL;
+	m_pPrimary = NULL;
 	mIsWorking=false; 
-	//init Kinect or Xtion
-	//initPrimeSensor();
 }
 
 KinectDevice::~KinectDevice()
@@ -33,7 +41,7 @@ XnStatus KinectDevice::initPrimeSensor()
 {
 		// Init OpenNI from XML
 		XnStatus rc = XN_STATUS_OK;
-		rc = m_Context.InitFromXmlFile(".\\Data\\openni.xml");
+		rc = m_Context.InitFromXmlFile("..\\..\\Data\\openni.xml");
 		CHECK_RC(rc, "InitFromXml");
 		// Make sure we have all OpenNI nodes we will be needing for this sample
 		xn::NodeInfoList nodes;
@@ -75,13 +83,7 @@ XnStatus KinectDevice::initPrimeSensor()
 bool KinectDevice::Update()
 {
 	//get meta data from kinect
-#if SHOW_DEPTH
-	m_DepthGenerator.GetMetaData(depthMetaData);
-#endif
-	m_ImageGenerator.GetMetaData(imageMetaData);
-	//m_IRGenerator.GetMetaData(irMetaData);
-	m_UserGenerator.GetUserPixels(0, sceneMetaData);
-	
+	readFrame();
 	//parse data to texture
 	ParseUserTexture(&sceneMetaData, true);
 	ParseColorDepthData(&depthMetaData,&sceneMetaData,&imageMetaData);
@@ -265,7 +267,6 @@ void KinectDevice::ParseColoredDepthData(xn::DepthMetaData *depthMetaData)
 	}
 	
 	//copy?? the data to pixelbox
-	mColoredDepthPixelBox = Ogre::PixelBox(KINECT_DEPTH_WIDTH, KINECT_DEPTH_HEIGHT, 1, Ogre::PF_R8G8B8, mColoredDepthBuffer);
 	mColoredDepthTextureAvailable = true;	
 }
 	
@@ -332,25 +333,40 @@ void KinectDevice::ParseColorDepthData(xn::DepthMetaData *depthMetaData,
 			nHistValue = depthHist[nValue];
 			mDepthBuffer[i] = nHistValue;
 
-			mColorBuffer[i * 3 + 0] = 255 * oniColors[nColorID][0];
-			mColorBuffer[i * 3 + 1] = 255 * oniColors[nColorID][1];
-			mColorBuffer[i * 3 + 2] = 255 * oniColors[nColorID][2];
+			mUserBuffer[i * 3 + 0] = 255 * oniColors[nColorID][0];
+			mUserBuffer[i * 3 + 1] = 255 * oniColors[nColorID][1];
+			mUserBuffer[i * 3 + 2] = 255 * oniColors[nColorID][2];
 		}
 		else 
 		{
 			mDepthBuffer[i] = 0;
 
-			mColorBuffer[i * 3 + 0] = 0;
-			mColorBuffer[i * 3 + 1] = 0;
-			mColorBuffer[i * 3 + 2] = 0;
+			mUserBuffer[i * 3 + 0] = 0;
+			mUserBuffer[i * 3 + 1] = 0;
+			mUserBuffer[i * 3 + 2] = 0;
 		}
 	}
 
+	const XnRGB24Pixel* pImageRow = imageMetaData->RGB24Data(); // - g_imageMD.YOffset();
+
+	for (XnUInt y = 0; y < Kinect::colorHeight; ++y)
+	{
+		const XnRGB24Pixel* pImage = pImageRow; // + g_imageMD.XOffset();
+
+		for (XnUInt x = 0; x < Kinect::colorWidth; ++x, ++pImage)
+		{
+			int index = (y*Kinect::colorWidth + x)*3;
+			mColorBuffer[index + 2] = (unsigned char) pImage->nBlue;
+			mColorBuffer[index + 1] = (unsigned char) pImage->nGreen;
+			mColorBuffer[index + 0] = (unsigned char) pImage->nRed;
+		}
+		pImageRow += Kinect::colorWidth;
+	}
+
 	//copy the data to pixelbox
-	mDepthPixelBox = Ogre::PixelBox(KINECT_DEPTH_WIDTH, KINECT_DEPTH_HEIGHT, 1, Ogre::PF_L8, mDepthBuffer);
 	mDepthTextureAvailable = true;	
-	mColorPixelBox = Ogre::PixelBox(KINECT_COLOR_WIDTH, KINECT_COLOR_HEIGHT, 1, Ogre::PF_B8G8R8, mColorBuffer);
 	mColorTextureAvailable = true;
+	mUserTextureAvailable = true;
 }
 
 //create multi screen with dynamic texture
@@ -374,7 +390,7 @@ void KinectDevice::createOgreUserTexture(const std::string UserTextureName, cons
 	if(!UserTextureName.empty())
 	{		
 		mUserTexture  = TextureManager::getSingleton().createManual(
-			&UserTextureName, // name
+			UserTextureName, // name
 			ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
 			TEX_TYPE_2D,      // type
 			KINECT_DEPTH_WIDTH, KINECT_DEPTH_HEIGHT,// width & height
@@ -386,9 +402,9 @@ void KinectDevice::createOgreUserTexture(const std::string UserTextureName, cons
 	{
 		// Create a material using the texture
 		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(
-				&materialName, // name
+				materialName, // name
 				ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
-		material->getTechnique(0)->getPass(0)->createTextureUnitState(&UserTextureName);
+		material->getTechnique(0)->getPass(0)->createTextureUnitState(UserTextureName);
 		material->getTechnique(0)->getPass(0)->getTextureUnitState(0)->setTextureRotate(Ogre::Degree(180)); 
 		//material->getTechnique(0)->getPass(0)->setSceneBlending(SBT_TRANSPARENT_ALPHA);
 	}
@@ -399,7 +415,7 @@ void KinectDevice::createOgreDepthTexture(const std::string depthTextureName,con
 	if(!depthTextureName.empty())
 	{
 		mDepthTexture = TextureManager::getSingleton().createManual(
-			&depthTextureName, 
+			depthTextureName, 
 			ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, 
 			TEX_TYPE_2D, 
 			KINECT_DEPTH_WIDTH, 
@@ -411,11 +427,11 @@ void KinectDevice::createOgreDepthTexture(const std::string depthTextureName,con
 	if(!materialName.empty())
 	{
 		//Create Material
-		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(&materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 		material->getTechnique(0)->getPass(0)->setLightingEnabled(false);
 		material->getTechnique(0)->getPass(0)->setDepthWriteEnabled(false);
 		material->getTechnique(0)->getPass(0)->setAlphaRejectSettings(CMPF_GREATER, 127);
-		material->getTechnique(0)->getPass(0)->createTextureUnitState(&depthTextureName);
+		material->getTechnique(0)->getPass(0)->createTextureUnitState(depthTextureName);
 		//material->getTechnique(0)->getPass(0)->getTextureUnitState(0)->setTextureRotate(Ogre::Degree(180)); 
 		//material->getTechnique(0)->getPass(0)->setVertexProgram("Ogre/Compositor/StdQuad_vp");
 		//material->getTechnique(0)->getPass(0)->setFragmentProgram("KinectDepth");
@@ -427,7 +443,7 @@ void KinectDevice::createOgreColorTexture(const std::string colorTextureName, co
 	if(!colorTextureName.empty())
 	{
 		mColorTexture = TextureManager::getSingleton().createManual(
-			&colorTextureName, 
+			colorTextureName, 
 			ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, 
 			TEX_TYPE_2D, 
 			KINECT_DEPTH_WIDTH, 
@@ -439,10 +455,10 @@ void KinectDevice::createOgreColorTexture(const std::string colorTextureName, co
 	if(!materialName.empty())
 	{
 		//Create Material
-		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(&materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 		material->getTechnique(0)->getPass(0)->setLightingEnabled(false);
 		material->getTechnique(0)->getPass(0)->setDepthWriteEnabled(false);
-		material->getTechnique(0)->getPass(0)->createTextureUnitState(&colorTextureName);
+		material->getTechnique(0)->getPass(0)->createTextureUnitState(colorTextureName);
 		material->getTechnique(0)->getPass(0)->getTextureUnitState(0)->setTextureRotate(Ogre::Degree(180)); 
 	}
 }
@@ -452,7 +468,7 @@ void KinectDevice::createOgreColoredDepthTexture(const std::string coloredDepthT
 	if(!coloredDepthTextureName.empty())
 	{
 		mColoredDepthTexture = TextureManager::getSingleton().createManual(
-		&coloredDepthTextureName, 
+		coloredDepthTextureName, 
 		ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, 
 		TEX_TYPE_2D, 
 		KINECT_DEPTH_WIDTH, 
@@ -466,12 +482,100 @@ void KinectDevice::createOgreColoredDepthTexture(const std::string coloredDepthT
 	if(!materialName.empty())
 	{
 		//Create Material
-		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(&materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+		Ogre::MaterialPtr material = MaterialManager::getSingleton().create(materialName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
 		material->getTechnique(0)->getPass(0)->setLightingEnabled(false);
 		material->getTechnique(0)->getPass(0)->setDepthWriteEnabled(false);
-		material->getTechnique(0)->getPass(0)->createTextureUnitState(&coloredDepthTextureName);
+		material->getTechnique(0)->getPass(0)->createTextureUnitState(coloredDepthTextureName);
 		//material->getTechnique(0)->getPass(0)->getTextureUnitState(0)->setTextureRotate(Ogre::Degree(180)); 
 	}
+}
+/*
+void KinectDevice::drawColorImage()
+{
+	if (g_DrawConfig.Streams.bBackground)
+		TextureMapDraw(&g_texBackground, pLocation);
+
+	const xn::MapMetaData* pImageMD;
+	const XnUInt8* pImage = NULL;
+
+	pImageMD = getImageMetaData();
+	pImage = getImageMetaData()->Data();
+
+	if (pImageMD->FrameID() == 0)
+	{
+		return;
+	}
+
+	const xn::DepthMetaData* pDepthMetaData = getDepthMetaData();
+
+	for (XnUInt16 nY = pImageMD->YOffset(); nY < pImageMD->YRes() + pImageMD->YOffset(); nY++)
+	{
+		XnUInt8* pTexture = TextureMapGetLine(&g_texImage, nY) + pImageMD->XOffset()*4;
+
+		if (pImageMD->PixelFormat() == XN_PIXEL_FORMAT_YUV422)
+		{
+			YUV422ToRGB888(pImage, pTexture, pImageMD->XRes()*2, g_texImage.Size.X*g_texImage.nBytesPerPixel);
+			pImage += pImageMD->XRes()*2;
+		}
+		else
+		{
+			for (XnUInt16 nX = 0; nX < pImageMD->XRes(); nX++, pTexture+=4)
+			{
+				XnInt32 nDepthIndex = 0;
+
+				if (pDepthMetaData != NULL)
+				{
+					XnDouble dRealX = (nX + pImageMD->XOffset()) / (XnDouble)pImageMD->FullXRes();
+					XnDouble dRealY = nY / (XnDouble)pImageMD->FullYRes();
+
+					XnUInt32 nDepthX = dRealX * pDepthMetaData->FullXRes() - pDepthMetaData->XOffset();
+					XnUInt32 nDepthY = dRealY * pDepthMetaData->FullYRes() - pDepthMetaData->YOffset();
+
+					if (nDepthX >= pDepthMetaData->XRes() || nDepthY >= pDepthMetaData->YRes())
+					{
+						nDepthIndex = -1;
+					}
+					else
+					{
+						nDepthIndex = nDepthY*pDepthMetaData->XRes() + nDepthX;
+					}
+				}
+
+				switch (pImageMD->PixelFormat())
+				{
+				case XN_PIXEL_FORMAT_RGB24:
+					pTexture[0] = pImage[0];
+					pTexture[1] = pImage[1];
+					pTexture[2] = pImage[2];
+					pImage+=3; 
+					break;
+				case XN_PIXEL_FORMAT_GRAYSCALE_8_BIT:
+					pTexture[0] = pTexture[1] = pTexture[2] = *pImage;
+					pImage+=1; 
+					break;
+				case XN_PIXEL_FORMAT_GRAYSCALE_16_BIT:
+					XnUInt16* p16 = (XnUInt16*)pImage;
+					pTexture[0] = pTexture[1] = pTexture[2] = (*p16) >> 2;
+					pImage+=2; 
+					break;
+				}
+
+				// decide if pixel should be lit or not
+				if (g_DrawConfig.Streams.Image.Coloring == DEPTH_MASKED_IMAGE &&
+					(pDepthMetaData == NULL || nDepthIndex == -1 || pDepthMetaData->Data()[nDepthIndex] == 0))
+				{
+					pTexture[3] = 0;
+				}
+				else
+				{
+					pTexture[3] = 255;
+				}
+			}
+		}
+	}
+
+	TextureMapUpdate(&g_texImage);
+	TextureMapDraw(&g_texImage, pLocation);
 }
 
 void KinectDevice::DrawGLUTDepthMapTexture()
@@ -511,7 +615,7 @@ void KinectDevice::DrawGLUTDepthMapTexture()
 
     glDisable(GL_TEXTURE_2D);
 }
-
+*/
 
 void* KinectDevice::getKinectColorBufferData() const
 {
@@ -593,6 +697,10 @@ void KinectDevice::readFrame()
 	if (m_AudioGenerator.IsValid())
 	{
 		m_AudioGenerator.GetMetaData(audioMetaData);
+	}
+	if (m_UserGenerator.IsValid())
+	{
+		m_UserGenerator.GetUserPixels(0, sceneMetaData);
 	}
 }
 

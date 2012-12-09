@@ -9,6 +9,10 @@
 #include "KinectDeviceManager.h"
 #include "TrackingSystem.h"
 
+static const std::string colorTextureName        = "KinectColorTexture";
+static const std::string depthTextureName        = "KinectDepthTexture";
+static const std::string coloredDepthTextureName = "KinectColoredDepthTexture";
+
 class OgreApp;
 class StatsFrameListener;
 

@@ -1,0 +1,129 @@
+material gello
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.500000 0.500000 0.500000 1.000000
+			diffuse 0.773753 0.521696 0.115756 1.000000
+			specular 0.284393 0.284393 0.284393 1.000000 9.000000
+			emissive 0.000000 0.000000 0.000000 1.000000
+		}
+	}
+}
+material cornea
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.500000 0.500000 0.500000 1.000000
+			diffuse 0.898564 0.861602 0.849282 1.000000
+			specular 0.296113 0.296113 0.296113 1.000000 40.500000
+			emissive 0.000000 0.000000 0.000000 1.000000
+		}
+	}
+}
+material blackhole
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.000000 0.000000 0.000000 1.000000
+			diffuse 0.000000 0.000000 0.000000 1.000000
+			specular 0.000000 0.000000 0.000000 1.000000 12.500000
+			emissive 0.000000 0.000000 0.000000 1.000000
+			lighting off
+		}
+	}
+}
+material gums
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.500000 0.500000 0.500000 1.000000
+			diffuse 0.640000 0.396077 0.102400 1.000000
+			specular 0.500000 0.500000 0.500000 1.000000 12.500000
+			emissive 0.000000 0.000000 0.000000 1.000000
+		}
+	}
+}
+material corneatran
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.500000 0.500000 0.500000 0.134446
+			diffuse 0.747901 0.575633 0.575633 0.134446
+			specular 0.150000 0.150000 0.150000 0.134446 27.500000
+			emissive 0.000000 0.000000 0.000000 0.134446
+			scene_blend alpha_blend
+			depth_write off
+		}
+	}
+}
+material irisblu
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.500000 0.500000 0.500000 1.000000
+			diffuse 0.008182 0.016503 0.330527 1.000000
+			specular 1.000000 1.000000 1.000000 1.000000 3.750000
+			emissive 0.000000 0.000000 0.000000 1.000000
+		}
+	}
+}
+material teeth
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.500000 0.500000 0.500000 1.000000
+			diffuse 1.000000 1.000000 1.000000 1.000000
+			specular 0.758703 0.758703 0.758703 1.000000 29.000000
+			emissive 0.000000 0.000000 0.000000 1.000000
+		}
+	}
+}
+material tongue
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.500000 0.500000 0.500000 1.000000
+			diffuse 0.689987 0.414437 0.420709 1.000000
+			specular 0.500000 0.500000 0.500000 1.000000 12.500000
+			emissive 0.000000 0.000000 0.000000 1.000000
+		}
+	}
+}
+material browsyel
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.500000 0.500000 0.500000 1.000000
+			diffuse 0.568724 0.493100 0.000000 1.000000
+			specular 0.597778 0.597778 0.597778 1.000000 9.000000
+			emissive 0.000000 0.000000 0.000000 1.000000
+		}
+	}
+}

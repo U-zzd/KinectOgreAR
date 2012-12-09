@@ -4,6 +4,7 @@
 #include "Chrono.h"
 #include "StatsFrameListener.h"
 #include <OgrePanelOverlayElement.h>
+#include "KinectDevice.h"
 
 using namespace Ogre;
 
@@ -45,29 +46,39 @@ bool OgreAppLogic::init(void)
 	int width  = 320;
 	int height = 240;
 
-	const std::string colorTextureName        = "KinectColorTexture";
-	const std::string depthTextureName        = "KinectDepthTexture";
-	const std::string coloredDepthTextureName = "KinectColoredDepthTexture";
-
-	mKinectDevice->createOgreDepthTexture(depthTextureName,"");
-	mKinectDevice->createOgreColoredDepthTexture(coloredDepthTextureName,"");
-	//mKinectDevice->setMotorPosition(mKinectMotorPosition);
-	createKinectOverlay(colorTextureName, depthTextureName, coloredDepthTextureName);
-
 	mTrackingSystem = new TrackingSystem;
 
-	initTracking(width, height);
-	createWebcamPlane(width, height, 45000.0f);	
+	if (mKinectDeviceManager.size() > 0)
+	{
+		//init the kinect device
+		mKinectDevice = mKinectDeviceManager[0];
+		if (mKinectDevice->initPrimeSensor() != XN_STATUS_OK)
+			return false;
+		//create texture 
+		mKinectDevice->createOgreColorTexture(colorTextureName,"");
+		mKinectDevice->createOgreDepthTexture(depthTextureName,"");
+		mKinectDevice->createOgreColoredDepthTexture(coloredDepthTextureName,"");
+		//mKinectDevice->setMotorPosition(mKinectMotorPosition);
+		createKinectOverlay(colorTextureName, depthTextureName, coloredDepthTextureName);
 
+		//init the ArToolkit tracking system
+		//initTracking(width, height);
+		//createWebcamPlane(width, height, 45000.0f);	
+	
+		mStatsFrameListener = new StatsFrameListener(mApplication->getRenderWindow());
+		mApplication->getOgreRoot()->addFrameListener(mStatsFrameListener);
+		mStatsFrameListener->showDebugOverlay(true);
 
-	mStatsFrameListener = new StatsFrameListener(mApplication->getRenderWindow());
-	mApplication->getOgreRoot()->addFrameListener(mStatsFrameListener);
-	mStatsFrameListener->showDebugOverlay(true);
-
-	mApplication->getKeyboard()->setEventCallback(&mOISListener);
-	mApplication->getMouse()->setEventCallback(&mOISListener);
-
-	return true;
+		mApplication->getKeyboard()->setEventCallback(&mOISListener);
+		mApplication->getMouse()->setEventCallback(&mOISListener);
+	
+		return true;
+	}
+	else
+	{
+		Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE, "No Kinect found", "AppLogic");
+		return false;
+	}
 }
 
 bool OgreAppLogic::preUpdate(Ogre::Real deltaTime)
@@ -86,6 +97,7 @@ bool OgreAppLogic::update(Ogre::Real deltaTime)
 		//Create Gray level PixelBox
 		//Ogre::PixelBox box(mVideoDevice->getWidth(), mVideoDevice->getHeight(), 1, Ogre::PF_L8, (void*) mWebcamBufferL8);
 		//Ogre::PixelBox box(mVideoDevice->getWidth(), mVideoDevice->getHeight(), 1, Ogre::PF_B8G8R8, (void*) mVideoDevice->getBufferData());
+		/*
 		Ogre::PixelBox box(mKinectDevice->getWidth(), mKinectDevice->getHeight(), 1, Ogre::PF_B8G8R8, (void*) mKinectDevice->getKinectColorBufferData());
 
 		//Tracking using ArToolKitPlus
@@ -99,8 +111,8 @@ bool OgreAppLogic::update(Ogre::Real deltaTime)
 		}
 		else
 		{
-			mObjectNode->setVisible(false);
-		}
+			mObjectNode->setVisible(true);
+		}*/
 	}
 	if (mAnimState)
 		mAnimState->addTime(deltaTime);
@@ -151,7 +163,7 @@ void OgreAppLogic::createCamera(void)
 	mCamera = mSceneMgr->createCamera("camera");
 	mCamera->setNearClipDistance(0.5);
 	mCamera->setFarClipDistance(50000);
-	mCamera->setPosition(0, 0, 0);
+	mCamera->setPosition(100, 100, 100);
 	mCamera->lookAt(0, 0, 1);
 	mCamera->setFOVy(Degree(40)); //FOVy camera Ogre = 40?
 	mCamera->setAspectRatio((float) mViewport->getActualWidth() / (float) mViewport->getActualHeight());	
@@ -166,16 +178,31 @@ void OgreAppLogic::createCamera(void)
 
 void OgreAppLogic::createScene(void)
 {
-	mSceneMgr->setSkyBox(true, "Examples/GridSkyBox");
+	// setup some basic lighting for our scene
+	
+    mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
+    mSceneMgr->createLight()->setPosition(20, 80, 50);
+	// create a floor mesh resource
+	MeshManager::getSingleton().createPlane("floor", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+	Plane(Vector3::UNIT_Y, -30), 1000, 1000, 10, 10, true, 1, 8, 8, Vector3::UNIT_Z);
 
+	// create a floor entity, give it a material, and place it at the origin
+    Entity* floor = mSceneMgr->createEntity("Floor", "floor");
+    floor->setMaterialName("Examples/BumpyMetal");
+    mSceneMgr->getRootSceneNode()->attachObject(floor);
+	
+	//mSceneMgr->getRootSceneNode()->attachObject(mSceneMgr->createEntity("Head", "ogrehead.mesh"));
+	//mSceneMgr->setSkyBox(true, "Examples/GridSkyBox");
+	/*
 	Ogre::Entity* ent = mSceneMgr->createEntity("Sinbad.mesh");	//1x1_cube.mesh //Sinbad.mesh //axes.mesh
 
 	mObjectNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("cube");	
 	mObjectNode->setOrientation(Quaternion(Degree(90.f), Vector3::UNIT_X));
 	Ogre::Real scale = 22;
-	mObjectNode->setPosition(0, 0, 5*scale);
+	mObjectNode->setPosition(10, 10, 10*scale);
 	mObjectNode->setScale(Ogre::Vector3::UNIT_SCALE*scale);
 	mObjectNode->attachObject(ent);
+	mObjectNode->setVisible(true);
 
 	// create swords and attach them to sinbad
 	Ogre::Entity* sword1 = mSceneMgr->createEntity("SinbadSword1", "Sword.mesh");
@@ -184,32 +211,22 @@ void OgreAppLogic::createScene(void)
 	ent->attachObjectToBone("Sheath.R", sword2);
 	mAnimState = ent->getAnimationState("Dance");
 	mAnimState->setLoop(true);
-	mAnimState->setEnabled(true);
+	mAnimState->setEnabled(true);*/
 
 }
 
 void OgreAppLogic::initTracking(int width, int height)
 {
-	if (mKinectDeviceManager.size() > 0)
-	{
-		mKinectDevice = mKinectDeviceManager[0];
-		mKinectDevice->initPrimeSensor();
-		mKinectDevice->createOgreColorTexture("WebcamTexture","");
-		mWebcamBufferL8 = new unsigned char[width*height];
-		mTrackingSystem->init(width, height);
+	mWebcamBufferL8 = new unsigned char[width*height];
+	mTrackingSystem->init(width, height);
 
-		//Create Webcam Material
-		MaterialPtr material = MaterialManager::getSingleton().create("WebcamMaterial", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
-		Ogre::Technique *technique = material->createTechnique();
-		technique->createPass();
-		material->getTechnique(0)->getPass(0)->setLightingEnabled(false);
-		material->getTechnique(0)->getPass(0)->setDepthWriteEnabled(false);
-		material->getTechnique(0)->getPass(0)->createTextureUnitState("WebcamTexture");
-	}
-	else
-	{
-		Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE, "No Kinect found", "AppLogic");
-	}
+	//Create Webcam Material
+	MaterialPtr material = MaterialManager::getSingleton().create("WebcamMaterial", ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME);
+	Ogre::Technique *technique = material->createTechnique();
+	technique->createPass();
+	material->getTechnique(0)->getPass(0)->setLightingEnabled(false);
+	material->getTechnique(0)->getPass(0)->setDepthWriteEnabled(false);
+	material->getTechnique(0)->getPass(0)->createTextureUnitState(colorTextureName);
 }
 
 void OgreAppLogic::createWebcamPlane(int width, int height, Ogre::Real _distanceFromCamera)
@@ -241,7 +258,7 @@ void OgreAppLogic::createWebcamPlane(int width, int height, Ogre::Real _distance
 void OgreAppLogic::createKinectOverlay(const std::string& colorTextureName, const std::string& depthTextureName, const std::string& coloredDepthTextureName)
 {
 	//Create Color Overlay
-	/*
+	
 	{
 		//Create Overlay
 		Ogre::OverlayManager& overlayManager = Ogre::OverlayManager::getSingleton();
@@ -258,13 +275,13 @@ void OgreAppLogic::createKinectOverlay(const std::string& colorTextureName, cons
 		Ogre::PanelOverlayElement* panel = static_cast<Ogre::PanelOverlayElement*>(overlayManager.createOverlayElement("Panel", "KinectColorPanel"));
 		panel->setMetricsMode(Ogre::GMM_PIXELS);
 		panel->setMaterialName(materialName);
-		panel->setDimensions((float)Ogre::Kinect::colorWidth, (float)Ogre::Kinect::colorHeight);
-		panel->setPosition(640.0f, 0.0f);
+		panel->setDimensions((float)Kinect::colorWidth/4, (float)Kinect::colorHeight/4);
+		panel->setPosition(0.0f, 0.0f);
 		overlay->add2D(panel);		
 		overlay->setZOrder(300);
 		overlay->show(); 
 	}
-	*/
+	
 	//Create Depth Overlay
 	{
 		//Create Overlay
@@ -277,22 +294,21 @@ void OgreAppLogic::createKinectOverlay(const std::string& colorTextureName, cons
 		material->getTechnique(0)->getPass(0)->setLightingEnabled(false);
 		material->getTechnique(0)->getPass(0)->setDepthWriteEnabled(false);
 		material->getTechnique(0)->getPass(0)->setAlphaRejectSettings(CMPF_GREATER, 127);
-
 		material->getTechnique(0)->getPass(0)->createTextureUnitState(depthTextureName);
-		material->getTechnique(0)->getPass(0)->setVertexProgram("Ogre/Compositor/StdQuad_vp");
-		material->getTechnique(0)->getPass(0)->setFragmentProgram("KinectDepth");
+		//material->getTechnique(0)->getPass(0)->setVertexProgram("Ogre/Compositor/StdQuad_vp");
+		//material->getTechnique(0)->getPass(0)->setFragmentProgram("KinectDepth");
 
 		//Create Panel
 		Ogre::PanelOverlayElement* panel = static_cast<Ogre::PanelOverlayElement*>(overlayManager.createOverlayElement("Panel", "KinectDepthPanel"));
 		panel->setMetricsMode(Ogre::GMM_PIXELS);
 		panel->setMaterialName(materialName);
-		panel->setDimensions((float)Kinect::depthWidth, (float)Kinect::depthHeight);
-		panel->setPosition((float)640.0f, 0.0f);
+		panel->setDimensions((float)Kinect::depthWidth/4, (float)Kinect::depthHeight/4);
+		panel->setPosition((float)640.0f/4, 0.0f);
 		overlay->add2D(panel);		
 		overlay->setZOrder(310);
 		overlay->show();
 	}
-
+	
 	//Create Colored Depth Overlay
 	{
 		//Create Overlay
@@ -310,8 +326,8 @@ void OgreAppLogic::createKinectOverlay(const std::string& colorTextureName, cons
 		Ogre::PanelOverlayElement* panel = static_cast<Ogre::PanelOverlayElement*>(overlayManager.createOverlayElement("Panel", "KinectColoredDepthPanel"));
 		panel->setMetricsMode(Ogre::GMM_PIXELS);
 		panel->setMaterialName(materialName);
-		panel->setDimensions((float)Kinect::depthWidth, (float)Kinect::depthHeight);
-		panel->setPosition((float)0.0f, 0.0f);
+		panel->setDimensions((float)Kinect::depthWidth/4, (float)Kinect::depthHeight/4);
+		panel->setPosition((float)1280.0f/4, 0.0f);
 		overlay->add2D(panel);		
 		overlay->setZOrder(320);
 		overlay->show();

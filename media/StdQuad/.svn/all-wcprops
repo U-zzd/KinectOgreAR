@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/34/trunk/Demos/media/StdQuad
+END
+StdQuad_vp.program
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/34/trunk/Demos/media/StdQuad/StdQuad_vp.program
+END
+StdQuad_vp.cg
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/!svn/ver/34/trunk/Demos/media/StdQuad/StdQuad_vp.cg
+END
+StdQuad_vp.glsl
+K 25
+svn:wc:ra_dav:version-url
+V 58
+/svn/!svn/ver/34/trunk/Demos/media/StdQuad/StdQuad_vp.glsl
+END

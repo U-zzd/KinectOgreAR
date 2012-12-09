@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf
+END
+GPGPU_GLSL.program
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/GPGPU_GLSL.program
+END
+GPGPU_HLSL.program
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/GPGPU_HLSL.program
+END
+GPGPU.cg
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/GPGPU.cg
+END
+GPGPU_unified.program
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/GPGPU_unified.program
+END

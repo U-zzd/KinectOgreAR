@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 47
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/glsl
+END
+GPGPU_hessian_fp.glsl
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/glsl/GPGPU_hessian_fp.glsl
+END
+GPGPU_nms_other_fp.glsl
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/glsl/GPGPU_nms_other_fp.glsl
+END
+GPGPU_fixed_vp.glsl
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/glsl/GPGPU_fixed_vp.glsl
+END
+GPGPU_rgb2gray_fp.glsl
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/glsl/GPGPU_rgb2gray_fp.glsl
+END
+GPGPU_gaussian_x_fp.glsl
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/glsl/GPGPU_gaussian_x_fp.glsl
+END
+GPGPU_octave_fp.glsl
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/glsl/GPGPU_octave_fp.glsl
+END
+GPGPU_gaussian_y_fp.glsl
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/glsl/GPGPU_gaussian_y_fp.glsl
+END
+GPGPU_downsampling_fp.glsl
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/glsl/GPGPU_downsampling_fp.glsl
+END
+GPGPU_nms_first_fp.glsl
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/glsl/GPGPU_nms_first_fp.glsl
+END
+GPGPU_interpolation_fp.glsl
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/glsl/GPGPU_interpolation_fp.glsl
+END

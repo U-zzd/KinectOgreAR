@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/script
+END
+GPGPU.material
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/script/GPGPU.material
+END
+GPGPU.compositor
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/script/GPGPU.compositor
+END
+GPGPU_generated.compositor
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/script/GPGPU_generated.compositor
+END
+GPGPU_generated.material
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/34/trunk/Demos/media/gpusurf/script/GPGPU_generated.material
+END

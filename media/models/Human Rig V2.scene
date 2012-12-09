@@ -1,0 +1,1000 @@
+<scene formatVersion="1.0" upAxis="y" unitsPerMeter="100" unitType="centimeters" minOgreVersion="1.7" ogreMaxVersion="2.3.6" author="Reuben Fleming" application="3DS Max">
+    <environment>
+        <colourAmbient r="0.333333" g="0.333333" b="0.333333" />
+        <colourBackground r="0" g="0" b="0" />
+        <clipping near="0" far="254000" />
+    </environment>
+    <nodes>
+        <node name="Body">
+            <position x="0" y="103.019" z="3.61609" />
+            <scale x="0.0132472" y="0.0132472" z="0.0132472" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Body" castShadows="true" receiveShadows="true" meshFile="Body.mesh">
+                <subentities>
+                    <subentity index="0" materialName="arms" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Head">
+            <position x="4.23908e-005" y="185.716" z="5.04359" />
+            <scale x="0.0197801" y="0.0188277" z="0.0203283" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Head" castShadows="true" receiveShadows="true" meshFile="Head.mesh">
+                <subentities>
+                    <subentity index="0" materialName="head" />
+                    <subentity index="1" materialName="Material#18" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Omni03">
+            <position x="66.7192" y="247.23" z="170.821" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="-0.707107" qy="-0" qz="-0" qw="-0.707107" />
+            <light name="Omni03" visible="true" type="point" castShadows="false" power="1">
+                <colourDiffuse r="0.984314" g="0.909804" b="0.776471" />
+                <colourSpecular r="1" g="1" b="1" />
+                <lightAttenuation range="508" constant="1" linear="0" quadric="0" />
+            </light>
+        </node>
+        <node name="Sky01">
+            <position x="0" y="311.77" z="-1.36279e-005" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="-0.707107" qy="-0" qz="-0" qw="-0.707107" />
+            <light name="Sky01" visible="true" type="spot" castShadows="false" power="0.9">
+                <colourDiffuse r="1" g="0.976471" b="0.94902" />
+                <colourSpecular r="1" g="1" b="1" />
+                <lightAttenuation range="10000" constant="1" linear="0" quadric="0" />
+                <lightRange inner="0" outer="0" />
+            </light>
+        </node>
+        <node name="Ground Plane">
+            <position x="0" y="0" z="0" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <plane name="Ground Plane" castShadows="true" receiveShadows="true" distance="-0" width="500" height="500" xSegments="1" ySegments="1" numTexCoordSets="1" uTile="1" vTile="1" material="ground" normals="true" movablePlane="true">
+                <normal x="-0" y="1" z="0" />
+                <upVector x="0" y="0" z="-1" />
+            </plane>
+        </node>
+        <node name="Trousers">
+            <position x="0" y="103.019" z="3.61609" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Trousers" castShadows="true" receiveShadows="true" meshFile="Trousers.mesh">
+                <subentities>
+                    <subentity index="0" materialName="Material#677" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Top">
+            <position x="0" y="103.019" z="3.61609" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Top" castShadows="true" receiveShadows="true" meshFile="Top.mesh">
+                <subentities>
+                    <subentity index="0" materialName="10-Default" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Belt">
+            <position x="0" y="105.349" z="3.61609" />
+            <scale x="1" y="0.932531" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Belt" castShadows="true" receiveShadows="true" meshFile="Belt.mesh">
+                <subentities>
+                    <subentity index="0" materialName="Belt" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Circle01">
+            <position x="0" y="3.22338e-007" z="7.37424" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Circle01" castShadows="true" receiveShadows="true" meshFile="Circle01.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Belt Loops">
+            <position x="0" y="104.39" z="3.61609" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Belt Loops" castShadows="true" receiveShadows="true" meshFile="Belt Loops.mesh">
+                <subentities>
+                    <subentity index="0" materialName="Material#677" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Text25">
+            <position x="0.0760176" y="-7.93581e-006" z="-53.222" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Text25" castShadows="true" receiveShadows="true" meshFile="Text25.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Rectangle01">
+            <position x="168.873" y="166.359" z="0" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="0.707107" qy="0" qz="0" qw="0.707107" />
+            <entity name="Rectangle01" castShadows="true" receiveShadows="true" meshFile="Rectangle01.mesh">
+                <subentities>
+                    <subentity index="0" materialName="NoMaterial" />
+                </subentities>
+            </entity>
+            <node name="Text02">
+                <position x="-63.4067" y="-2.32135e-006" z="-53.1063" />
+                <scale x="1" y="1" z="1" />
+                <rotation qx="0" qy="0" qz="0" qw="1" />
+                <entity name="Text02" castShadows="true" receiveShadows="true" meshFile="Text02.mesh">
+                    <subentities>
+                        <subentity index="0" materialName="NoMaterial" />
+                    </subentities>
+                </entity>
+            </node>
+            <node name="Rectangle26">
+                <position x="83.6541" y="2.12451e-006" z="48.603" />
+                <scale x="1" y="1" z="1" />
+                <rotation qx="0" qy="0" qz="0" qw="1" />
+                <entity name="Rectangle26" castShadows="true" receiveShadows="true" meshFile="Rectangle26.mesh">
+                    <subentities>
+                        <subentity index="0" materialName="NoMaterial" />
+                    </subentities>
+                </entity>
+                <node name="Section31">
+                    <position x="0.0499388" y="-4.51742e-007" z="3.01986" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Section31" castShadows="true" receiveShadows="true" meshFile="Section31.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Hair_Colour01">
+                        <position x="0" y="-2.9225e-006" z="1.27746e-013" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Hair_Colour01" castShadows="true" receiveShadows="true" meshFile="CTRL_Hair_Colour01.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+            </node>
+            <node name="Rectangle34">
+                <position x="-81.065" y="1.91376e-006" z="43.7817" />
+                <scale x="1" y="1" z="1" />
+                <rotation qx="0" qy="0" qz="0" qw="1" />
+                <entity name="Rectangle34" castShadows="true" receiveShadows="true" meshFile="Rectangle34.mesh">
+                    <subentities>
+                        <subentity index="0" materialName="NoMaterial" />
+                    </subentities>
+                </entity>
+                <node name="Text32">
+                    <position x="-0.825996" y="-5.08792e-007" z="-11.6398" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Text32" castShadows="true" receiveShadows="true" meshFile="Text32.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Text29">
+                    <position x="11.3179" y="-2.60724e-007" z="-5.96467" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Text29" castShadows="true" receiveShadows="true" meshFile="Text29.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Rectangle05">
+                    <position x="-6.2052" y="2.3616e-007" z="5.4027" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Rectangle05" castShadows="true" receiveShadows="true" meshFile="Rectangle05.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Tongue">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Tongue" castShadows="true" receiveShadows="true" meshFile="CTRL_Tongue.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Section29">
+                    <position x="11.2359" y="2.36741e-007" z="5.41601" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Section29" castShadows="true" receiveShadows="true" meshFile="Section29.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Confused">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Confused" castShadows="true" receiveShadows="true" meshFile="CTRL_Confused.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Text21">
+                    <position x="-6.86346" y="-2.60724e-007" z="-5.96467" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Text21" castShadows="true" receiveShadows="true" meshFile="Text21.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+            </node>
+            <node name="Text35">
+                <position x="83.8352" y="5.61904e-006" z="45.337" />
+                <scale x="1" y="1" z="1" />
+                <rotation qx="0" qy="0" qz="0" qw="1" />
+                <entity name="Text35" castShadows="true" receiveShadows="true" meshFile="Text35.mesh">
+                    <subentities>
+                        <subentity index="0" materialName="NoMaterial" />
+                    </subentities>
+                </entity>
+            </node>
+            <node name="Rectangle07">
+                <position x="83.5698" y="2.44619e-008" z="0.559636" />
+                <scale x="1" y="1" z="1" />
+                <rotation qx="0" qy="0" qz="0" qw="1" />
+                <entity name="Rectangle07" castShadows="true" receiveShadows="true" meshFile="Rectangle07.mesh">
+                    <subentities>
+                        <subentity index="0" materialName="NoMaterial" />
+                    </subentities>
+                </entity>
+                <node name="Line02">
+                    <position x="-5.98679" y="9.4427e-007" z="21.6024" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="1" qy="-0" qz="-0" qw="-4.37114e-008" />
+                    <entity name="Line02" castShadows="true" receiveShadows="true" meshFile="Line02.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Section27">
+                    <position x="7.81993" y="7.17729e-007" z="19.1916" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Section27" castShadows="true" receiveShadows="true" meshFile="Section27.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Bottom">
+                        <position x="0" y="-1.02674e-006" z="4.488e-014" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Bottom" castShadows="true" receiveShadows="true" meshFile="CTRL_Bottom.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Section26">
+                    <position x="7.81993" y="-4.32825e-007" z="-7.12999" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Section26" castShadows="true" receiveShadows="true" meshFile="Section26.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Top">
+                        <position x="0" y="-1.02674e-006" z="4.48801e-014" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Top" castShadows="true" receiveShadows="true" meshFile="CTRL_Top.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Text23">
+                    <position x="0.625892" y="-1.23684e-006" z="-28.2957" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Text23" castShadows="true" receiveShadows="true" meshFile="Text23.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Line03">
+                    <position x="-7.00283" y="-4.2023e-007" z="-9.61375" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="1" qy="-0" qz="-0" qw="-4.37114e-008" />
+                    <entity name="Line03" castShadows="true" receiveShadows="true" meshFile="Line03.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+            </node>
+            <node name="Rectangle04">
+                <position x="83.3613" y="-2.06753e-006" z="-47.2997" />
+                <scale x="1" y="1" z="1" />
+                <rotation qx="0" qy="0" qz="0" qw="1" />
+                <entity name="Rectangle04" castShadows="true" receiveShadows="true" meshFile="Rectangle04.mesh">
+                    <subentities>
+                        <subentity index="0" materialName="NoMaterial" />
+                    </subentities>
+                </entity>
+                <node name="Text26">
+                    <position x="0.181094" y="-3.85979e-007" z="-3.26602" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Text26" castShadows="true" receiveShadows="true" meshFile="Text26.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Section28">
+                    <position x="0.0499388" y="-4.51742e-007" z="3.01987" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Section28" castShadows="true" receiveShadows="true" meshFile="Section28.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Hair_Colour">
+                        <position x="0" y="1.26954e-006" z="-5.54935e-014" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Hair_Colour" castShadows="true" receiveShadows="true" meshFile="CTRL_Hair_Colour.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+            </node>
+            <node name="Line04">
+                <position x="9.93598" y="6.88669e-008" z="1.5755" />
+                <scale x="3.41784" y="1" z="3.41784" />
+                <rotation qx="1" qy="-0" qz="-0" qw="-4.37114e-008" />
+                <entity name="Line04" castShadows="true" receiveShadows="true" meshFile="Line04.mesh">
+                    <subentities>
+                        <subentity index="0" materialName="NoMaterial" />
+                    </subentities>
+                </entity>
+                <node name="Text31">
+                    <position x="0.0543378" y="5.65469e-008" z="1.29364" />
+                    <scale x="0.292582" y="1" z="0.292582" />
+                    <rotation qx="1" qy="-0" qz="0" qw="-4.37114e-008" />
+                    <entity name="Text31" castShadows="true" receiveShadows="true" meshFile="Text31.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Section23">
+                    <position x="0.0336801" y="3.70552e-007" z="8.47722" />
+                    <scale x="0.84734" y="2.89608" z="0.84734" />
+                    <rotation qx="1" qy="-0" qz="0" qw="-4.37114e-008" />
+                    <entity name="Section23" castShadows="true" receiveShadows="true" meshFile="Section23.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Jaw_Drop">
+                        <position x="0" y="-5.77529e-013" z="2.52446e-020" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Jaw_Drop" castShadows="true" receiveShadows="true" meshFile="CTRL_Jaw_Drop.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                        <node name="Section19">
+                            <position x="2.42233e-005" y="-3.88581e-007" z="-0.167335" />
+                            <scale x="0.602966" y="0.345295" z="0.602966" />
+                            <rotation qx="-2.38419e-007" qy="0" qz="0" qw="1" />
+                            <entity name="Section19" castShadows="true" receiveShadows="true" meshFile="Section19.mesh">
+                                <subentities>
+                                    <subentity index="0" materialName="NoMaterial" />
+                                </subentities>
+                            </entity>
+                            <node name="CTRL_Jaw_Move">
+                                <position x="0" y="0" z="0" />
+                                <scale x="1" y="1" z="1" />
+                                <rotation qx="1.42109e-014" qy="0" qz="0" qw="1" />
+                                <entity name="CTRL_Jaw_Move" castShadows="true" receiveShadows="true" meshFile="CTRL_Jaw_Move.mesh">
+                                    <subentities>
+                                        <subentity index="0" materialName="Material#652" />
+                                    </subentities>
+                                </entity>
+                                <node name="Text19">
+                                    <position x="0.012131" y="-2.94432e-007" z="-4.87659" />
+                                    <scale x="1" y="1" z="1" />
+                                    <rotation qx="1.42109e-014" qy="0" qz="0" qw="1" />
+                                    <entity name="Text19" castShadows="true" receiveShadows="true" meshFile="Text19.mesh">
+                                        <subentities>
+                                            <subentity index="0" materialName="NoMaterial" />
+                                        </subentities>
+                                    </entity>
+                                </node>
+                            </node>
+                        </node>
+                        <node name="Text33">
+                            <position x="0.00171017" y="-2.25528e-007" z="-5.15952" />
+                            <scale x="1" y="1" z="1" />
+                            <rotation qx="0" qy="0" qz="0" qw="1" />
+                            <entity name="Text33" castShadows="true" receiveShadows="true" meshFile="Text33.mesh">
+                                <subentities>
+                                    <subentity index="0" materialName="NoMaterial" />
+                                </subentities>
+                            </entity>
+                        </node>
+                    </node>
+                </node>
+                <node name="Section18">
+                    <position x="-7.72317" y="-7.2904e-008" z="-1.66785" />
+                    <scale x="0.292582" y="1" z="0.292582" />
+                    <rotation qx="1" qy="-0" qz="0" qw="-4.37114e-008" />
+                    <entity name="Section18" castShadows="true" receiveShadows="true" meshFile="Section18.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Lower_Lids_L">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="-3.55271e-015" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Lower_Lids_L" castShadows="true" receiveShadows="true" meshFile="CTRL_Lower_Lids_L.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Section17">
+                    <position x="-7.72357" y="-3.36327e-007" z="-7.69431" />
+                    <scale x="0.292582" y="1" z="0.292582" />
+                    <rotation qx="1" qy="-0" qz="0" qw="-4.37114e-008" />
+                    <entity name="Section17" castShadows="true" receiveShadows="true" meshFile="Section17.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Upper_Lids_L">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="-3.55271e-015" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Upper_Lids_L" castShadows="true" receiveShadows="true" meshFile="CTRL_Upper_Lids_L.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Circle10">
+                    <position x="-7.75243" y="-2.19461e-007" z="-5.0207" />
+                    <scale x="0.292582" y="1" z="0.292582" />
+                    <rotation qx="1" qy="-0" qz="0" qw="-4.37114e-008" />
+                    <entity name="Circle10" castShadows="true" receiveShadows="true" meshFile="Circle10.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Text01">
+                    <position x="-0.0236856" y="-4.11298e-007" z="-9.40941" />
+                    <scale x="0.292582" y="1" z="0.292582" />
+                    <rotation qx="1" qy="-0" qz="0" qw="-4.37114e-008" />
+                    <entity name="Text01" castShadows="true" receiveShadows="true" meshFile="Text01.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Text43">
+                    <position x="-0.0236856" y="-3.4132e-007" z="-7.8085" />
+                    <scale x="0.292582" y="1" z="0.292582" />
+                    <rotation qx="1" qy="-0" qz="0" qw="-4.37114e-008" />
+                    <entity name="Text43" castShadows="true" receiveShadows="true" meshFile="Text43.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Section01">
+                    <position x="-0.0865063" y="-2.02835e-007" z="-4.64041" />
+                    <scale x="0.292582" y="1" z="0.292582" />
+                    <rotation qx="1" qy="-0" qz="0" qw="-4.37114e-008" />
+                    <entity name="Section01" castShadows="true" receiveShadows="true" meshFile="Section01.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Eye_Control">
+                        <position x="0" y="-1.15506e-012" z="5.04892e-020" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="-3.55271e-015" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Eye_Control" castShadows="true" receiveShadows="true" meshFile="CTRL_Eye_Control.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Section08">
+                    <position x="7.55293" y="-7.2904e-008" z="-1.66785" />
+                    <scale x="0.292582" y="1" z="0.292582" />
+                    <rotation qx="1" qy="-0" qz="0" qw="-4.37114e-008" />
+                    <entity name="Section08" castShadows="true" receiveShadows="true" meshFile="Section08.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Lower_Lids_R">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="-3.55271e-015" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Lower_Lids_R" castShadows="true" receiveShadows="true" meshFile="CTRL_Lower_Lids_R.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Circle09">
+                    <position x="7.49636" y="-2.19461e-007" z="-5.0207" />
+                    <scale x="0.292582" y="1" z="0.292582" />
+                    <rotation qx="1" qy="-0" qz="0" qw="-4.37114e-008" />
+                    <entity name="Circle09" castShadows="true" receiveShadows="true" meshFile="Circle09.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Section07">
+                    <position x="7.56082" y="-3.36327e-007" z="-7.69431" />
+                    <scale x="0.292582" y="1" z="0.292582" />
+                    <rotation qx="1" qy="-0" qz="0" qw="-4.37114e-008" />
+                    <entity name="Section07" castShadows="true" receiveShadows="true" meshFile="Section07.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Upper_Lids_R">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="-3.55271e-015" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Upper_Lids_R" castShadows="true" receiveShadows="true" meshFile="CTRL_Upper_Lids_R.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Rectangle12">
+                    <position x="-9.83099" y="-2.09621e-006" z="-12.5026" />
+                    <scale x="0.131779" y="0.4504" z="0.131779" />
+                    <rotation qx="1" qy="-0" qz="0" qw="4.37114e-008" />
+                    <entity name="Rectangle12" castShadows="true" receiveShadows="true" meshFile="Rectangle12.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Brow_L_03">
+                        <position x="0" y="1.43694e-006" z="-6.28107e-014" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Brow_L_03" castShadows="true" receiveShadows="true" meshFile="CTRL_Brow_L_03.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Rectangle15">
+                    <position x="-4.11173" y="-2.09621e-006" z="-12.5026" />
+                    <scale x="0.131779" y="0.4504" z="0.131779" />
+                    <rotation qx="1" qy="-0" qz="0" qw="4.37114e-008" />
+                    <entity name="Rectangle15" castShadows="true" receiveShadows="true" meshFile="Rectangle15.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Brow_L_01">
+                        <position x="0" y="1.43694e-006" z="-6.28107e-014" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Brow_L_01" castShadows="true" receiveShadows="true" meshFile="CTRL_Brow_L_01.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Rectangle13">
+                    <position x="-6.98974" y="-2.1727e-006" z="-12.8988" />
+                    <scale x="0.131779" y="0.4504" z="0.131779" />
+                    <rotation qx="1" qy="-0" qz="0" qw="4.37114e-008" />
+                    <entity name="Rectangle13" castShadows="true" receiveShadows="true" meshFile="Rectangle13.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Brow_L_02">
+                        <position x="0" y="1.43694e-006" z="-6.28108e-014" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Brow_L_02" castShadows="true" receiveShadows="true" meshFile="CTRL_Brow_L_02.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Text28">
+                    <position x="-0.113104" y="-9.86256e-007" z="-15.6735" />
+                    <scale x="0.292582" y="1" z="0.292582" />
+                    <rotation qx="1" qy="-0" qz="0" qw="4.37114e-008" />
+                    <entity name="Text28" castShadows="true" receiveShadows="true" meshFile="Text28.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Rectangle10">
+                    <position x="6.8507" y="-2.1727e-006" z="-12.8988" />
+                    <scale x="0.131779" y="0.4504" z="0.131779" />
+                    <rotation qx="1" qy="-0" qz="0" qw="4.37114e-008" />
+                    <entity name="Rectangle10" castShadows="true" receiveShadows="true" meshFile="Rectangle10.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Brow_R_02">
+                        <position x="0" y="1.43694e-006" z="-6.28108e-014" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Brow_R_02" castShadows="true" receiveShadows="true" meshFile="CTRL_Brow_R_02.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Rectangle09">
+                    <position x="9.65717" y="-2.09621e-006" z="-12.5026" />
+                    <scale x="0.131779" y="0.4504" z="0.131779" />
+                    <rotation qx="1" qy="-0" qz="0" qw="4.37114e-008" />
+                    <entity name="Rectangle09" castShadows="true" receiveShadows="true" meshFile="Rectangle09.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Brow_R_01">
+                        <position x="0" y="1.43694e-006" z="-6.28107e-014" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Brow_R_01" castShadows="true" receiveShadows="true" meshFile="CTRL_Brow_R_01.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Rectangle11">
+                    <position x="4.03248" y="-2.09621e-006" z="-12.5026" />
+                    <scale x="0.131779" y="0.4504" z="0.131779" />
+                    <rotation qx="1" qy="-0" qz="0" qw="4.37114e-008" />
+                    <entity name="Rectangle11" castShadows="true" receiveShadows="true" meshFile="Rectangle11.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Brow_R_03">
+                        <position x="0" y="1.43694e-006" z="-6.28107e-014" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Brow_R_03" castShadows="true" receiveShadows="true" meshFile="CTRL_Brow_R_03.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+            </node>
+            <node name="Rectangle08">
+                <position x="-73.6621" y="-5.3444e-007" z="-12.2266" />
+                <scale x="1" y="1" z="1" />
+                <rotation qx="0" qy="0" qz="0" qw="1" />
+                <entity name="Rectangle08" castShadows="true" receiveShadows="true" meshFile="Rectangle08.mesh">
+                    <subentities>
+                        <subentity index="0" materialName="NoMaterial" />
+                    </subentities>
+                </entity>
+                <node name="Text49">
+                    <position x="13.0471" y="-1.18539e-006" z="-27.1187" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Text49" castShadows="true" receiveShadows="true" meshFile="Text49.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Text50">
+                    <position x="13.5598" y="2.68291e-006" z="-14.7022" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="-8.89109e-008" qy="0" qz="0" qw="1" />
+                    <entity name="Text50" castShadows="true" receiveShadows="true" meshFile="Text50.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Text51">
+                    <position x="13.4183" y="-1.4629e-007" z="-3.34673" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Text51" castShadows="true" receiveShadows="true" meshFile="Text51.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Text48">
+                    <position x="13.8314" y="3.74559e-006" z="9.6091" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="-8.89109e-008" qy="0" qz="0" qw="1" />
+                    <entity name="Text48" castShadows="true" receiveShadows="true" meshFile="Text48.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Section35">
+                    <position x="13.8596" y="3.62182e-006" z="14.272" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="-8.89109e-008" qy="0" qz="0" qw="1" />
+                    <entity name="Section35" castShadows="true" receiveShadows="true" meshFile="Section35.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_LipCurl03">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_LipCurl03" castShadows="true" receiveShadows="true" meshFile="CTRL_LipCurl03.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Section37">
+                    <position x="13.5585" y="5.25657e-008" z="1.20256" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Section37" castShadows="true" receiveShadows="true" meshFile="Section37.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Cheeks03">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Cheeks03" castShadows="true" receiveShadows="true" meshFile="CTRL_Cheeks03.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Section34">
+                    <position x="13.1872" y="-1.02316e-006" z="-23.4071" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Section34" castShadows="true" receiveShadows="true" meshFile="Section34.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Cheeks02">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Cheeks02" castShadows="true" receiveShadows="true" meshFile="CTRL_Cheeks02.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Section36">
+                    <position x="13.4884" y="2.51621e-006" z="-11.0213" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="-8.89109e-008" qy="0" qz="0" qw="1" />
+                    <entity name="Section36" castShadows="true" receiveShadows="true" meshFile="Section36.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_LipCurl02">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_LipCurl02" castShadows="true" receiveShadows="true" meshFile="CTRL_LipCurl02.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Text46">
+                    <position x="-13.1581" y="-1.14267e-006" z="-14.7191" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Text46" castShadows="true" receiveShadows="true" meshFile="Text46.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Section32">
+                    <position x="-13.018" y="-9.79326e-007" z="-10.9823" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Section32" castShadows="true" receiveShadows="true" meshFile="Section32.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Cheeks01">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Cheeks01" castShadows="true" receiveShadows="true" meshFile="CTRL_Cheeks01.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Text20">
+                    <position x="-13.5294" y="-1.1865e-006" z="-27.1439" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Text20" castShadows="true" receiveShadows="true" meshFile="Text20.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Section20">
+                    <position x="-13.3893" y="-1.02316e-006" z="-23.4071" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="0" qy="0" qz="0" qw="1" />
+                    <entity name="Section20" castShadows="true" receiveShadows="true" meshFile="Section20.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_Cheeks">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_Cheeks" castShadows="true" receiveShadows="true" meshFile="CTRL_Cheeks.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Section38">
+                    <position x="-12.7169" y="3.1241e-006" z="14.3074" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="-8.89109e-008" qy="0" qz="0" qw="1" />
+                    <entity name="Section38" castShadows="true" receiveShadows="true" meshFile="Section38.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_LipCurl04">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_LipCurl04" castShadows="true" receiveShadows="true" meshFile="CTRL_LipCurl04.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+                <node name="Text52">
+                    <position x="-12.7451" y="3.24667e-006" z="9.61722" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="-8.89109e-008" qy="0" qz="0" qw="1" />
+                    <entity name="Text52" castShadows="true" receiveShadows="true" meshFile="Text52.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Text47">
+                    <position x="-12.7451" y="2.67565e-006" z="-3.44624" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="-8.89109e-008" qy="0" qz="0" qw="1" />
+                    <entity name="Text47" castShadows="true" receiveShadows="true" meshFile="Text47.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                </node>
+                <node name="Section33">
+                    <position x="-12.7169" y="2.55307e-006" z="1.24397" />
+                    <scale x="1" y="1" z="1" />
+                    <rotation qx="-8.89109e-008" qy="0" qz="0" qw="1" />
+                    <entity name="Section33" castShadows="true" receiveShadows="true" meshFile="Section33.mesh">
+                        <subentities>
+                            <subentity index="0" materialName="NoMaterial" />
+                        </subentities>
+                    </entity>
+                    <node name="CTRL_LipCurl01">
+                        <position x="0" y="0" z="0" />
+                        <scale x="1" y="1" z="1" />
+                        <rotation qx="0" qy="0" qz="0" qw="1" />
+                        <entity name="CTRL_LipCurl01" castShadows="true" receiveShadows="true" meshFile="CTRL_LipCurl01.mesh">
+                            <subentities>
+                                <subentity index="0" materialName="Material#652" />
+                            </subentities>
+                        </entity>
+                    </node>
+                </node>
+            </node>
+        </node>
+        <node name="Shoes">
+            <position x="0" y="103.019" z="3.61609" />
+            <scale x="0.0132472" y="0.0132472" z="0.0132472" />
+            <rotation qx="0" qy="0" qz="0" qw="1" />
+            <entity name="Shoes" castShadows="true" receiveShadows="true" meshFile="Shoes.mesh">
+                <subentities>
+                    <subentity index="0" materialName="Shoes" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="Omni04">
+            <position x="-86.1704" y="247.23" z="-164.618" />
+            <scale x="1" y="1" z="1" />
+            <rotation qx="-0.707107" qy="-0" qz="-0" qw="-0.707107" />
+            <light name="Omni04" visible="true" type="point" castShadows="false" power="1">
+                <colourDiffuse r="0.984314" g="0.909804" b="0.776471" />
+                <colourSpecular r="1" g="1" b="1" />
+                <lightAttenuation range="508" constant="1" linear="0" quadric="0" />
+            </light>
+        </node>
+    </nodes>
+</scene>

@@ -1,0 +1,32 @@
+material Examples/GridSkyBox
+{
+	technique
+	{
+		pass
+		{
+			lighting off
+			depth_write off
+
+			texture_unit
+			{
+				cubic_texture grid.jpg separateUV
+				tex_address_mode clamp
+			}
+		}
+	}
+}
+
+material Examples/Grid
+{
+	technique
+	{
+		pass
+		{
+
+			texture_unit
+			{
+				texture grid_up.jpg
+			}
+		}
+	}
+}
