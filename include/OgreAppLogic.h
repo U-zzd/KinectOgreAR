@@ -54,6 +54,7 @@ protected:
 	void initTracking(int width, int height);
 	void createWebcamPlane(int width, int height, Ogre::Real _distanceFromCamera);
 	void createKinectOverlay(const std::string& colorTextureName, const std::string& depthTextureName, const std::string& coloredDepthTextureName);
+	Ogre::ManualObject* OgreAppLogic::createCubeMesh(Ogre::String name, Ogre::String matName);
 	// OGRE
 	OgreApp *mApplication;
 	Ogre::SceneManager *mSceneMgr;
