@@ -8,6 +8,7 @@
 #include "VideoDeviceManager.h"
 #include "KinectDeviceManager.h"
 #include "TrackingSystem.h"
+#include "KinectFramelistener.h"
 
 static const std::string colorTextureName        = "KinectColorTexture";
 static const std::string depthTextureName        = "KinectDepthTexture";
@@ -48,7 +49,7 @@ protected:
 	void createViewport(void);
 	void createCamera(void);
 	void createScene(void);
-	
+	void createFrameListener(void); //copy from exampleapplication.h
 	bool processInputs(Ogre::Real deltaTime);
 
 	void initTracking(int width, int height);
@@ -69,6 +70,10 @@ protected:
 	unsigned char* mWebcamBufferL8;
 	TrackingSystem* mTrackingSystem;
 	Ogre::AnimationState* mAnimState;
+	//exampleaplliation.h
+	Root *mRoot;
+    KinectFrameListener* mFrameListener;
+    RenderWindow* mWindow;
 
 	StatsFrameListener *mStatsFrameListener;
 

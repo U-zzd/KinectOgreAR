@@ -106,5 +106,8 @@
     <ClInclude Include="..\src\KinectDevice\KinectDeviceManager.h">
       <Filter>Source Files\KinectDevice</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\KinectFramelistener.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

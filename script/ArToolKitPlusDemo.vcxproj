@@ -128,6 +128,7 @@
     <ClInclude Include="..\src\KinectDevice\UserSelectionStructures.h" />
     <ClInclude Include="..\src\KinectDevice\UserSelector.h" />
     <ClInclude Include="..\src\KinectDevice\UserTracker.h" />
+    <ClInclude Include="..\src\KinectFramelistener.h" />
     <ClInclude Include="..\src\SinbadCharacterController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

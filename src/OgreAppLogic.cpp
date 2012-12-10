@@ -5,6 +5,7 @@
 #include "StatsFrameListener.h"
 #include <OgrePanelOverlayElement.h>
 #include "KinectDevice.h"
+#include "KinectFrameListener.h"
 
 using namespace Ogre;
 
@@ -65,9 +66,10 @@ bool OgreAppLogic::init(void)
 		//initTracking(width, height);
 		//createWebcamPlane(width, height, 45000.0f);	
 	
-		mStatsFrameListener = new StatsFrameListener(mApplication->getRenderWindow());
-		mApplication->getOgreRoot()->addFrameListener(mStatsFrameListener);
-		mStatsFrameListener->showDebugOverlay(true);
+		//mStatsFrameListener = new StatsFrameListener(mApplication->getRenderWindow());
+		//mApplication->getOgreRoot()->addFrameListener(mStatsFrameListener);
+		//mStatsFrameListener->showDebugOverlay(true);
+		createFrameListener();
 
 		mApplication->getKeyboard()->setEventCallback(&mOISListener);
 		mApplication->getMouse()->setEventCallback(&mOISListener);
@@ -79,6 +81,13 @@ bool OgreAppLogic::init(void)
 		Ogre::Exception(Ogre::Exception::ERR_INVALID_STATE, "No Kinect found", "AppLogic");
 		return false;
 	}
+}
+
+void OgreAppLogic::createFrameListener(void)
+{
+    mFrameListener= new KinectFrameListener(mApplication->getRenderWindow(), mCamera);
+    mFrameListener->showDebugOverlay(true);
+    mApplication->getOgreRoot()->addFrameListener(mFrameListener);
 }
 
 bool OgreAppLogic::preUpdate(Ogre::Real deltaTime)
@@ -203,7 +212,7 @@ void OgreAppLogic::createScene(void)
     floor->setMaterialName("Examples/BumpyMetal");
     mSceneMgr->getRootSceneNode()->attachObject(floor);
 	
-	//mSceneMgr->getRootSceneNode()->attachObject(mSceneMgr->createEntity("Head", "ogrehead.mesh"));
+	mSceneMgr->getRootSceneNode()->attachObject(mSceneMgr->createEntity("Head", "ogrehead.mesh"));
 	//mSceneMgr->setSkyBox(true, "Examples/GridSkyBox");
 	/*
 	Ogre::Entity* ent = mSceneMgr->createEntity("Sinbad.mesh");	//1x1_cube.mesh //Sinbad.mesh //axes.mesh
