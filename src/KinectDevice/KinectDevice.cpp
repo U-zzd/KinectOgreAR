@@ -82,6 +82,8 @@ XnStatus KinectDevice::initPrimeSensor()
 //update the all buffer and texture from kinect
 bool KinectDevice::Update()
 {
+	if (!mIsWorking)
+		return false;
 	//get meta data from kinect
 	readFrame();
 	//parse data to texture
