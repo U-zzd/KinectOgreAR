@@ -55,7 +55,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OGRE;$(OPEN_NI_INCLUDE);$(SolutionDir)\Dependencies\ARToolKitPlus_2.1.1\include;$(SolutionDir)\Dependencies\ofVideoInput\include;$(XN_NITE_INSTALL_PATH)\Include;../include;C:\Program Files %28x86%29\boost\boost_1_44;F:\My Lab\My Kinect\MyKinectTest\VirtualTS\KinectAR\Dependencies\ARToolKitPlus_2.1.1\include;$(SolutionDir)\KinectAR\ArToolKitPlusDemo\src\KinectDevice;$(ogrebullet)\Collisions\include;$(ogrebullet)\Dynamics\include;$(BULLET_ROOT)\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(OGRE_HOME)\include;$(OGRE_HOME)\include\OGRE;$(OPEN_NI_INCLUDE);$(SolutionDir)\KinectAR\Dependencies\ARToolKitPlus_2.1.1\include;$(SolutionDir)\KinectAR\Dependencies\ofVideoInput\include;$(XN_NITE_INSTALL_PATH)\Include;C:\Program Files %28x86%29\boost\boost_1_51;$(SolutionDir)\KinectAR\ArToolKitPlusDemo\src\KinectDevice;$(ogrebullet)\Collisions\include;$(ogrebullet)\Dynamics\include;$(BULLET_ROOT)\src;../include;../;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
@@ -63,7 +63,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>OgreMain_d.lib;OIS_d.lib;videoInput.lib;ARToolKitPlusD.lib;XnVNITE_1_5_2.lib;openNI.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(SolutionDir)\KinectAR\Dependencies\ofVideoInput\lib;$(OGRE_HOME)\lib\$(ConfigurationName);$(OGRE_HOME)\lib\$(ConfigurationName)\opt;C:\Program Files %28x86%29\boost\boost_1_44\lib;$(SolutionDir)\KinectAR\Dependencies\ARToolKitPlus_2.1.1\lib\Win32;$(OPEN_NI_LIB64);$(OPEN_NI_LIB);$(XN_NITE_INSTALL_PATH)\Lib;$(XN_NITE_INSTALL_PATH)\Lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)\KinectAR\Dependencies\ofVideoInput\lib;$(OGRE_HOME)\lib\$(ConfigurationName);$(OGRE_HOME)\lib\$(ConfigurationName)\opt;C:\Program Files %28x86%29\boost\boost_1_51\lib;$(SolutionDir)\KinectAR\Dependencies\ARToolKitPlus_2.1.1\lib\Win32;$(OPEN_NI_LIB64);$(OPEN_NI_LIB);$(XN_NITE_INSTALL_PATH)\Lib;$(XN_NITE_INSTALL_PATH)\Lib64;..\gl;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <IgnoreSpecificDefaultLibraries>atlthunk.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AssemblyDebug>true</AssemblyDebug>
