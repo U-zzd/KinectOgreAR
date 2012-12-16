@@ -54,7 +54,6 @@ bool OgreAppLogic::init(void)
 		
 		//init the kinect device
 		mKinectDevice = mKinectDeviceManager[0];
-		/*
 		if (mKinectDevice->initPrimeSensor() != XN_STATUS_OK)
 			return false;
 		//create texture 
@@ -63,10 +62,10 @@ bool OgreAppLogic::init(void)
 		mKinectDevice->createOgreColoredDepthTexture(coloredDepthTextureName,"");
 		//mKinectDevice->setMotorPosition(mKinectMotorPosition);
 		createKinectOverlay(colorTextureName, depthTextureName, coloredDepthTextureName);
-		*/
+		
 		//init the ArToolkit tracking system
-		//initTracking(width, height);
-		//createWebcamPlane(width, height, 45000.0f);	
+		initTracking(width, height);
+		createWebcamPlane(width, height, 45000.0f);	
 	
 		//mStatsFrameListener = new StatsFrameListener(mApplication->getRenderWindow());
 		//mApplication->getOgreRoot()->addFrameListener(mStatsFrameListener);
@@ -108,7 +107,6 @@ bool OgreAppLogic::update(Ogre::Real deltaTime)
 		//Create Gray level PixelBox
 		//Ogre::PixelBox box(mVideoDevice->getWidth(), mVideoDevice->getHeight(), 1, Ogre::PF_L8, (void*) mWebcamBufferL8);
 		//Ogre::PixelBox box(mVideoDevice->getWidth(), mVideoDevice->getHeight(), 1, Ogre::PF_B8G8R8, (void*) mVideoDevice->getBufferData());
-		/*
 		Ogre::PixelBox box(mKinectDevice->getWidth(), mKinectDevice->getHeight(), 1, Ogre::PF_B8G8R8, (void*) mKinectDevice->getKinectColorBufferData());
 
 		//Tracking using ArToolKitPlus
@@ -123,7 +121,7 @@ bool OgreAppLogic::update(Ogre::Real deltaTime)
 		else
 		{
 			mObjectNode->setVisible(true);
-		}*/
+		}
 	}
 	if (mAnimState)
 		mAnimState->addTime(deltaTime);
@@ -192,17 +190,17 @@ void OgreAppLogic::createScene(void)
 	// setup some basic lighting for our scene
 	mSceneMgr->setSkyDome(true, "Examples/CloudySky", 5, 8);
 	// make a cube to bounce around
-	Entity *ent;
+	Entity *ent1;
 	SceneNode *boxNode;
-	/*
+	
 	ManualObject *cmo = createCubeMesh("manual", "");
 	cmo->convertToMesh("cube");
-	ent = mSceneMgr->createEntity("Cube", "cube.mesh");
-	ent->setCastShadows(true);
+	ent1 = mSceneMgr->createEntity("Cube", "cube.mesh");
+	ent1->setCastShadows(true);
 	boxNode = mSceneMgr->getRootSceneNode()->createChildSceneNode();
-	boxNode->attachObject(ent);
+	boxNode->attachObject(ent1);
 	boxNode->setScale(Vector3(0.1,0.1,0.1)); // for some reason converttomesh multiplied dimensions by 10
-	*/
+	
     mSceneMgr->setAmbientLight(ColourValue(0.3, 0.3, 0.3));
     mSceneMgr->createLight()->setPosition(20, 80, 50);
 	// create a floor mesh resource
@@ -214,9 +212,9 @@ void OgreAppLogic::createScene(void)
     floor->setMaterialName("Examples/BumpyMetal");
     mSceneMgr->getRootSceneNode()->attachObject(floor);
 	
-	//mSceneMgr->getRootSceneNode()->attachObject(mSceneMgr->createEntity("Head", "ogrehead.mesh"));
-	//mSceneMgr->setSkyBox(true, "Examples/GridSkyBox");
-	/*
+	mSceneMgr->getRootSceneNode()->attachObject(mSceneMgr->createEntity("Head", "ogrehead.mesh"));
+	mSceneMgr->setSkyBox(true, "Examples/GridSkyBox");
+	
 	Ogre::Entity* ent = mSceneMgr->createEntity("Sinbad.mesh");	//1x1_cube.mesh //Sinbad.mesh //axes.mesh
 
 	mObjectNode = mSceneMgr->getRootSceneNode()->createChildSceneNode("cube");	
@@ -234,7 +232,7 @@ void OgreAppLogic::createScene(void)
 	ent->attachObjectToBone("Sheath.R", sword2);
 	mAnimState = ent->getAnimationState("Dance");
 	mAnimState->setLoop(true);
-	mAnimState->setEnabled(true);*/
+	mAnimState->setEnabled(true);
 
 }
 
@@ -313,6 +311,9 @@ void OgreAppLogic::createWebcamPlane(int width, int height, Ogre::Real _distance
 
 	// Update orientation
 	node->setOrientation(mCamera->getOrientation());
+
+	mObjectNode->setPosition(mCameraNode->getPosition() + mCamera->getDirection() * 500);
+	mObjectNode->setOrientation(mCamera->getOrientation());
 }
 
 void OgreAppLogic::createKinectOverlay(const std::string& colorTextureName, const std::string& depthTextureName, const std::string& coloredDepthTextureName)

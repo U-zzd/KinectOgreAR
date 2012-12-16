@@ -4,11 +4,44 @@
 using namespace Ogre;
 using namespace Kinect;
 
-KinectDevice::KinectDevice()
+/*calibrating the depth camera http://openkinect.org/wiki/Imaging_Information
+  approximation is given by St¨¦phane Magnenat in this post: distance = 0.1236 * tan(rawDisparity / 2842.5 + 1.1863) in meters. 
+  Adding a final offset term of -0.037 centers the original ROS data. The tan approximation has a sum squared difference of .33 cm while the 1/x approximation is about 1.7 cm.
+  Once you have the distance using the measurement above, a good approximation for converting (i, j, z) to (x,y,z) is:
+		x = (i - w / 2) * (z + minDistance) * scaleFactor * (w/h)
+		y = (j - h / 2) * (z + minDistance) * scaleFactor
+		z = z
+		Where
+		minDistance = -10
+		scaleFactor = .0021.
+		These values were found by hand.
+*/
+void KinectDevice::RawDepthToMeters1(void)
+{
+	const float k1 = 1.1863;
+    const float k2 = 2842.5;
+    const float k3 = 0.1236;
+	for (int i=0; i<2048; i++)
+	{
+        const float depth = k3 * tanf(i/k2 + k1);
+		mGammaMap[i]=depth;
+	}
+}
+
+void KinectDevice::RawDepthToMeters2(void)
+{
+	for (int i=0; i<2048; i++)
+        mGammaMap[i] = float(1.0 / (double(i) * -0.0030711016 + 3.3309495161));
+}
+
+void KinectDevice::RawDepthToMeters3(void)
 {
 	for (int i=0; i<2048; i++)
 		mGammaMap[i] = (unsigned short)(float)(powf(i/2048.0f, 3)*6*6*256);
+}
 
+KinectDevice::KinectDevice()
+{
 	mColorTexture.setNull();
 	mDepthTexture.setNull();
 	mColoredDepthTexture.setNull();
@@ -16,6 +49,9 @@ KinectDevice::KinectDevice()
 	memset(mColorBuffer,0,KINECT_COLOR_WIDTH * KINECT_COLOR_HEIGHT * 3);
 	memset(mUserBuffer,0,KINECT_COLOR_WIDTH * KINECT_COLOR_HEIGHT * 3);
 	memset(mColoredDepthBuffer,0,KINECT_COLOR_WIDTH * KINECT_COLOR_HEIGHT * 3);
+	memset(PalletIntsR,0,256*sizeof(XnUInt8));
+	memset(PalletIntsG,0,256*sizeof(XnUInt8));
+	memset(PalletIntsB,0,256*sizeof(XnUInt8));
 	mColorTextureAvailable = false;
 	mDepthTextureAvailable = false;
 	mColoredDepthTextureAvailable = false;
@@ -29,6 +65,10 @@ KinectDevice::KinectDevice()
 	m_hCalibrationCallbacks = NULL;
 	m_pPrimary = NULL;
 	mIsWorking=false; 
+
+	RawDepthToMeters1();
+	CreateRainbowPallet();
+
 }
 
 KinectDevice::~KinectDevice()
@@ -89,7 +129,8 @@ bool KinectDevice::Update()
 	//parse data to texture
 	ParseUserTexture(&sceneMetaData, true);
 	ParseColorDepthData(&depthMetaData,&sceneMetaData,&imageMetaData);
-	ParseColoredDepthData(&depthMetaData);
+	ParseColoredDepthData(&depthMetaData,DepthColoringType::COLOREDDEPTH);
+	Parse3DDepthData(&depthMetaData);
 	return UpdateColorDepthTexture();
 }
 
@@ -213,56 +254,136 @@ void KinectDevice::ParseUserTexture(xn::SceneMetaData *sceneMetaData, bool m_fro
 }
 
 //convertDepthToRGB function
-void KinectDevice::ParseColoredDepthData(xn::DepthMetaData *depthMetaData)
+void KinectDevice::ParseColoredDepthData(xn::DepthMetaData *depthMetaData,DepthColoringType DepthColoring)
 {
 	unsigned short *tmpGrayPixels = (unsigned short *)depthMetaData->Data();
+	int MaxDepth = getDepthGenerator()->GetDeviceMaxDepth();
 	int i=0;
+	//XnUInt8 nAlpha = m_DrawConfig.Streams.Depth.fTransparency*255;
+
+	XnUInt16 nColIndex;
 	for (int y=0; y<480; y++)
 	{
 		unsigned char* destrow = mColoredDepthBuffer + (y*(640))*3;
 		for (int x=0; x<640; x++)
 		{
+			XnUInt8 nRed = 0;
+			XnUInt8 nGreen = 0;
+			XnUInt8 nBlue = 0;
 			unsigned short Depth = tmpGrayPixels[i];
-			int pval = mGammaMap[Depth];
-			int lb = pval & 0xff;
-			switch (pval>>8) 
+			switch (DepthColoring)
 			{
-				case 0:
-					destrow[2] = 255;
-					destrow[1] = 255-lb;
-					destrow[0] = 255-lb;
+				case LINEAR_HISTOGRAM:
+					nRed = nGreen = depthHist[Depth]*255;
 					break;
-				case 1:
-					destrow[2] = 255;
-					destrow[1] = lb;
-					destrow[0] = 0;
+				case PSYCHEDELIC:
+					switch ((Depth/10) % 10)
+					{
+					case 0:
+						nRed = 255;
+						break;
+					case 1:
+						nGreen = 255;
+						break;
+					case 2:
+						nBlue = 255;
+						break;
+					case 3:
+						nRed = 255;
+						nGreen = 255;
+						break;
+					case 4:
+						nGreen = 255;
+						nBlue = 255;
+						break;
+					case 5:
+						nRed = 255;
+						nBlue = 255;
+						break;
+					case 6:
+						nRed = 255;
+						nGreen = 255;
+						nBlue = 255;
+						break;
+					case 7:
+						nRed = 127;
+						nBlue = 255;
+						break;
+					case 8:
+						nRed = 255;
+						nBlue = 127;
+						break;
+					case 9:
+						nRed = 127;
+						nGreen = 255;
+						break;
+					}
 					break;
-				case 2:
-					destrow[2] = 255-lb;
-					destrow[1] = 255;
-					destrow[0] = 0;
+				case RAINBOW:
+					nColIndex = (XnUInt16)((Depth / (MaxDepth / 256.)));
+					nRed = PalletIntsR[nColIndex];
+					nGreen = PalletIntsG[nColIndex];
+					nBlue = PalletIntsB[nColIndex];
 					break;
-				case 3:
-					destrow[2] = 0;
-					destrow[1] = 255;
-					destrow[0] = lb;
+				case CYCLIC_RAINBOW:
+					nColIndex = (Depth % 256);
+					nRed = PalletIntsR[nColIndex];
+					nGreen = PalletIntsG[nColIndex];
+					nBlue = PalletIntsB[nColIndex];
 					break;
-				case 4:
-					destrow[2] = 0;
-					destrow[1] = 255-lb;
-					destrow[0] = 255;
+				case CYCLIC_RAINBOW_HISTOGRAM:{
+					float fHist = depthHist[Depth];
+					nColIndex = (Depth % 256);
+					nRed = PalletIntsR[nColIndex]   * fHist;
+					nGreen = PalletIntsG[nColIndex] * fHist;
+					nBlue = PalletIntsB[nColIndex]  * fHist;
 					break;
-				case 5:
-					destrow[2] = 0;
-					destrow[1] = 0;
-					destrow[0] = 255-lb;
-					break;
-				default:
-					destrow[2] = 0;
-					destrow[1] = 0;
-					destrow[0] = 0;
-					break;
+					}
+				case COLOREDDEPTH:	
+					unsigned long pval = mGammaMap[Depth];
+					int lb = pval & 0xff;
+					switch (pval>>8) 
+					{
+						case 0:
+							nRed = 255;
+							nGreen = 255-lb;
+							nBlue = 255-lb;
+							break;
+						case 1:
+							nRed = 255;
+							nGreen = lb;
+							nBlue = 0;
+							break;
+						case 2:
+							nRed = 255-lb;
+							nGreen = 255;
+							nBlue = 0;
+							break;
+						case 3:
+							nRed = 0;
+							nGreen = 255;
+							nBlue = lb;
+							break;
+						case 4:
+							nRed = 0;
+							nGreen = 255-lb;
+							nBlue = 255;
+							break;
+						case 5:
+							nRed = 0;
+							nGreen = 0;
+							nBlue = 255-lb;
+							break;
+						default:
+							nRed = 0;
+							nGreen = 0;
+							nBlue = 0;
+							break;
+					}
 			}
+			destrow[0] = nBlue;
+			destrow[1] = nGreen;
+			destrow[2] = nRed;
 			destrow += 3;
 			i++;
 		}
@@ -271,7 +392,156 @@ void KinectDevice::ParseColoredDepthData(xn::DepthMetaData *depthMetaData)
 	//copy?? the data to pixelbox
 	mColoredDepthTextureAvailable = true;	
 }
-	
+
+void KinectDevice::CalculateHistogram()
+{
+	xn::DepthGenerator* pDepthGen = getDepthGenerator();
+
+	if (pDepthGen == NULL)
+		return;
+
+	XnUInt32 nZRes = pDepthGen->GetDeviceMaxDepth() + 1;
+	xnOSMemSet(depthHist, 0, nZRes*sizeof(float));
+	int nNumberOfPoints = 0;
+
+	XnDepthPixel nValue;
+
+	const XnDepthPixel* pDepth = pDepthGen->GetDepthMap();
+	const XnDepthPixel* pDepthEnd = pDepth + (pDepthGen->GetDataSize() / sizeof(XnDepthPixel));
+
+	while (pDepth != pDepthEnd)
+	{
+		nValue = *pDepth;
+
+		XN_ASSERT(nValue <= nZRes);
+
+		if (nValue != 0)
+		{
+			depthHist[nValue]++;
+			nNumberOfPoints++;
+		}
+
+		pDepth++;
+	}
+
+	XnUInt32 nIndex;
+	for (nIndex = 1; nIndex < nZRes; nIndex++)
+	{
+		depthHist[nIndex] += depthHist[nIndex-1];
+	}
+	for (nIndex = 1; nIndex < nZRes; nIndex++)
+	{
+		if (depthHist[nIndex] != 0)
+		{
+			depthHist[nIndex] = (nNumberOfPoints-depthHist[nIndex]) / nNumberOfPoints;
+		}
+	}
+}
+// --------------------------------
+// Code
+// --------------------------------
+void KinectDevice::CreateRainbowPallet()
+{
+	unsigned char r, g, b;
+	for (int i=1; i<255; i++)
+	{
+		if (i<=29)
+		{
+			r = (unsigned char)(129.36-i*4.36);
+			g = 0;
+			b = (unsigned char)255;
+		}
+		else if (i<=86)
+		{
+			r = 0;
+			g = (unsigned char)(-133.54+i*4.52);
+			b = (unsigned char)255;
+		}
+		else if (i<=141)
+		{
+			r = 0;
+			g = (unsigned char)255;
+			b = (unsigned char)(665.83-i*4.72);
+		}
+		else if (i<=199)
+		{
+			r = (unsigned char)(-635.26+i*4.47);
+			g = (unsigned char)255;
+			b = 0;
+		}
+		else
+		{
+			r = (unsigned char)255;
+			g = (unsigned char)(1166.81-i*4.57);
+			b = 0;
+		}
+
+		PalletIntsR[i] = r;
+		PalletIntsG[i] = g;
+		PalletIntsB[i] = b;
+	}
+}
+void KinectDevice::Parse3DDepthData(xn::DepthMetaData * depthMetaData)
+{
+	unsigned short *tmpGrayPixels = (unsigned short *)depthMetaData->Data();
+	int MaxDepth = getDepthGenerator()->GetDeviceMaxDepth();
+	// We're just going to calculate and draw every 4th pixel (equivalent of 160x120)
+	int skip = 1;
+	for (int y=0; y<Kinect::KINECT_DEPTH_HEIGHT; y+=skip)
+	{
+		unsigned char* destrow = mColoredDepthBuffer + (y*(KINECT_DEPTH_WIDTH))*3;
+		for (int x=0; x<Kinect::KINECT_DEPTH_WIDTH; x+=skip)
+		{
+		    int offset = x+y*KINECT_DEPTH_WIDTH;
+			// Convert kinect data to world xyz coordinate
+			unsigned short rawDepth = tmpGrayPixels[offset];
+			Vector3 v = DepthToWorld(x,y,rawDepth);
+			destrow[2] = v[0];
+			destrow[1] = v[1];
+			destrow[0] = v[2];
+			destrow += 3;
+		}
+	}
+}
+
+Vector3 KinectDevice::DepthToWorld(int x, int y, int depthValue)
+{
+    static const double fx_d = 1.0 / 5.9421434211923247e+02;
+    static const double fy_d = 1.0 / 5.9104053696870778e+02;
+    static const double cx_d = 3.3930780975300314e+02;
+    static const double cy_d = 2.4273913761751615e+02;
+
+    Vector3 result;
+    const double depth = mGammaMap[depthValue];;
+    result[0] = float((x - cx_d) * depth * fx_d);
+    result[1] = float((y - cy_d) * depth * fy_d);
+    result[2] = float(depth);
+    return result;
+}
+/*
+Point2i KinectDevice::WorldToColor(const Vec3f &pt)
+{
+    static const Matrix4 rotationMatrix(
+                            Vec3f(9.9984628826577793e-01f, 1.2635359098409581e-03f, -1.7487233004436643e-02f),
+                            Vec3f(-1.4779096108364480e-03f, 9.9992385683542895e-01f, -1.2251380107679535e-02f),
+                            Vec3f(1.7470421412464927e-02f, 1.2275341476520762e-02f, 9.9977202419716948e-01f));
+    static const Vec3f translation(1.9985242312092553e-02f, -7.4423738761617583e-04f, -1.0916736334336222e-02f);
+    static const Matrix4 finalMatrix = rotationMatrix.Transpose() * Matrix4::Translation(-translation);
+    
+    static const double fx_rgb = 5.2921508098293293e+02;
+    static const double fy_rgb = 5.2556393630057437e+02;
+    static const double cx_rgb = 3.2894272028759258e+02;
+    static const double cy_rgb = 2.6748068171871557e+02;
+
+    const Vec3f transformedPos = finalMatrix.TransformPoint(pt);
+    const float invZ = 1.0f / transformedPos.z;
+
+    Point2i result;
+    result.x = Utility::Bound(cv::Math::Round((transformedPos.x * fx_rgb * invZ) + cx_rgb), 0, 639);
+    result.y = Utility::Bound(Math::Round((transformedPos.y * fy_rgb * invZ) + cy_rgb), 0, 479);
+    return result;
+}
+*/
 //Parse color&depth Texture
 void KinectDevice::ParseColorDepthData(xn::DepthMetaData *depthMetaData,
 							xn::SceneMetaData *sceneMetaData,

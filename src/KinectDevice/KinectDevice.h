@@ -46,6 +46,20 @@ enum
 	KINECT_MAX_DEPTH =10000,
 };
 
+typedef enum 
+{
+	DEPTH_OFF,
+	LINEAR_HISTOGRAM,
+	PSYCHEDELIC,
+	PSYCHEDELIC_SHADES,
+	RAINBOW,
+	CYCLIC_RAINBOW,
+	CYCLIC_RAINBOW_HISTOGRAM,
+	STANDARD_DEVIATION,
+	NUM_OF_DEPTH_TYPES,
+	COLOREDDEPTH,
+} DepthColoringType;
+
 static XnFloat oniColors[][3] =
 {
 	{0,1,1},
@@ -106,7 +120,8 @@ public:
 	void ParseColorDepthData(xn::DepthMetaData *depthMetaData,
 							xn::SceneMetaData *sceneMetaData,
 							xn::ImageMetaData *imageMetaData);
-	void ParseColoredDepthData(xn::DepthMetaData *);
+	void ParseColoredDepthData(xn::DepthMetaData *,DepthColoringType);
+	void KinectDevice::Parse3DDepthData(xn::DepthMetaData *);
 	void KinectDevice::drawColorImage();
 	//create Ogre Texture
 	void createMutliDynamicTexture();
@@ -288,14 +303,25 @@ private:
 	bool             mColoredDepthTextureAvailable;
 
 	//Kinect Data Buffer
-	unsigned short  mGammaMap[2048];
+	unsigned long  mGammaMap[2048];
 	unsigned char	mDepthBuffer[KINECT_DEPTH_WIDTH * KINECT_DEPTH_HEIGHT];  //also tempary depth Pixel for Ogre
 	unsigned char	mColorBuffer[KINECT_COLOR_WIDTH * KINECT_COLOR_HEIGHT * 3]; // also tmpeary colore pixel for Ogre
 	unsigned char	mUserBuffer[KINECT_COLOR_WIDTH * KINECT_COLOR_HEIGHT * 3]; // also tmpeary colore pixel for Ogre
 	unsigned char   mColoredDepthBuffer[KINECT_DEPTH_WIDTH * KINECT_DEPTH_HEIGHT * 3]; //also tempeary colored depth pixel for Ogre
+	unsigned char   m3DDepthBuffer[KINECT_DEPTH_WIDTH * KINECT_DEPTH_HEIGHT * 3]; //also tempeary colored depth pixel for Ogre
 	float mAudioBuffer[KINECT_MICROPHONE_COUNT][KINECT_AUDIO_BUFFER_LENGTH];
 	float depthHist[KINECT_MAX_DEPTH];
+	XnUInt8 PalletIntsR [256];
+	XnUInt8 PalletIntsG [256];
+	XnUInt8 PalletIntsB [256];
 
+	void RawDepthToMeters3(void);
+	void RawDepthToMeters2(void);
+	void RawDepthToMeters1(void);
+	void CalculateHistogram();
+	void CreateRainbowPallet();
+	Ogre::Vector3 DepthToWorld(int x, int y, int depthValue);
+	Ogre::Vector2 WorldToColor(const Ogre::Vector3 &pt);
 };
 
 }
